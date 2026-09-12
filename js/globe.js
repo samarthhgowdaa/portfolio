@@ -325,12 +325,10 @@
     countEl.textContent = storedVisits.toLocaleString();
 
     var timeEl = document.getElementById('ist-time');
-    var hudClockEl = document.getElementById('hud-clock');
-
-    function updateTime() {
-      var now = new Date();
-      if (timeEl) {
+    if (timeEl) {
+      function updateTime() {
         try {
+          var now = new Date();
           var ist = new Intl.DateTimeFormat('en-US', {
             timeZone: 'Asia/Kolkata',
             hour: '2-digit',
@@ -343,17 +341,9 @@
           timeEl.textContent = 'UTC+5:30';
         }
       }
-      if (hudClockEl) {
-        try {
-          var utc = now.toISOString().substring(11, 19) + ' UTC';
-          hudClockEl.textContent = utc;
-        } catch (err) {
-          hudClockEl.textContent = '00:00:00 UTC';
-        }
-      }
+      updateTime();
+      setInterval(updateTime, 1000);
     }
-    updateTime();
-    setInterval(updateTime, 1000);
   }
 
   if (document.readyState === 'loading') {

@@ -1,30 +1,20 @@
 # Portfolio Maintenance Handbook 🛠️
 
-Welcome to your portfolio handbook! This website is engineered to be **lightweight, slick, ultra-fast, and completely editable in Markdown**—just like writing posts for Chirpy / Jekyll.
+Welcome to your portfolio handbook! This website is engineered to be **lightweight, slick, ultra-fast, and completely editable in Markdown**—just like writing posts for Chirpy / Jekyll. It uses zero npm packages, zero node modules, and zero external runtime frameworks.
 
 ---
 
-## 🎨 1. Color Schemes & Live Theme Switcher
+## 🌓 1. Light Mode & Dark Mode
 
-Your portfolio comes pre-configured with **5 distinct, high-contrast engineering color palettes** inspired by the palettes you uploaded, plus a warm light mode:
+Your portfolio includes two custom engineering themes:
 
-| Palette Name | Key Hex Codes | Mood / Vibe |
-| :--- | :--- | :--- |
-| **Petrol & Teal** *(Default)* | `#081721`, `#0E2C40`, `#148D8D`, `#C1E1A7`, `#EFBC75` | Deep midnight ocean with vibrant cyan teal and golden amber |
-| **Moon Phases** | `#161C22`, `#212A31`, `#4EA6C4`, `#748D92`, `#D3D9D4` | Cool celestial slate and titanium gray |
-| **Cyber Marine** | `#181A36`, `#25274D`, `#2E9CCA`, `#AAABB8` | Electric neon indigo and sky blue |
-| **Retro Artsy** | `#15161C`, `#D79922`, `#EFE2BA`, `#F13C20` | Editorial vintage warmth, ochre gold, and coral |
-| **Obsidian & Copper** | `#0E1013`, `#16191F`, `#E58A4E` | Warm glowing vacuum tubes, copper traces, and charcoal |
-| **Parchment Light** | `#FAF8F5`, `#FFFFFF`, `#127676` | Clean editorial light mode |
+- **Dark Mode (Default)**: Deep midnight petrol (`#081721`), cyan teal (`#148D8D`), and warm amber (`#EFBC75`).
+- **Light Mode**: Warm editorial parchment (`#FAF8F5`), crisp white cards, and deep teal (`#127676`).
 
-### How Visitors Switch Palettes:
-In the sidebar footer, there is an interactive **swatch bar**. Visitors can click any color circle to transform the site theme in real-time. Their selection is automatically saved in `localStorage`.
-
-### How to Change the Default Theme:
-Open `js/main.js` and look for:
-```javascript
-applyTheme('petrol-teal'); // Change to 'moon-slate', 'cyber-marine', etc.
-```
+### How It Works:
+- **System-Linked by Default**: When a visitor first arrives, the site automatically detects their OS/browser preference (`prefers-color-scheme`).
+- **Manual Toggle**: Visitors can click the **Dark Mode / Light Mode** pill button in the sidebar footer to switch anytime.
+- **Persistent**: The visitor's preference is saved in their browser's `localStorage`.
 
 ---
 
@@ -98,58 +88,11 @@ Open `content/experience.md`, set `enabled: true`, and run `python3 build.py`.
 
 ---
 
----
-
-## 💻 5. Cyberdeck CLI Terminal (SG-CLI)
-
-Your website includes a full retro-futuristic dropdown terminal emulator modeled after an embedded engineering console.
-
-### Opening & Closing the Terminal:
-- Click the **`CLI [~]`** button on the top HUD bar, or
-- Press the **`` ` `` / `~` (tilde)** key anywhere on the page, or
-- Press **`Escape`** or click **`ESC [x]`** to close.
-
-### Available Commands:
-| Command | What It Does |
-| :--- | :--- |
-| `neofetch` | Prints authentic hardware & engineering workstation specifications with ASCII chip art |
-| `projects` / `projects 1-6` | Lists modules or inspects detailed architecture specs for projects |
-| `skills` | Summarizes L0 to L4 silicon and software stack |
-| `bio` | Displays engineer background and philosophy |
-| `resume` | Transmits / opens `assets/resume.pdf` |
-| `theme <name>` | Switches palette on the fly (`petrol`, `moon`, `marine`, `retro`, `obsidian`, `light`) |
-| `whoami`, `date`, `uptime` | System diagnostics |
-| `clear` | Clears terminal screen |
-| `exit` | Closes the terminal modal |
-
----
-
-## 🔊 6. Web Audio Synthesizer (SFX)
-
-The top HUD bar includes a **`SFX: OFF / ON`** button:
-- **Zero Audio Files**: All sounds are synthesized in real-time using native Web Audio API oscillators (sine and triangle waves).
-- **Muted by Default**: Respects user preference; never plays audio unexpectedly.
-- **Persistent**: Remembers toggle state in `localStorage`.
-- Produces subtle mechanical click chirps on button clicks, tactile keystroke ticks in the CLI terminal, and an aerospace chime on terminal boot.
-
----
-
-## 🔬 7. Microprocessor Schematic & Silicon Stack
-
-- **Interactive Pinout HUD (About Section)**: Hover over any of the 20 SOIC pins on the `SG-328P` IC diagram to inspect active signals (UART RX/TX, SPI MOSI/MISO/SCK/CS, I2C SDA/SCL, ADC, PWM, CAN bus).
-- **Silicon Architecture Stack (Focus Section)**: Click through the 5 architectural layers (L0 Silicon & HDL, L1 Embedded & Edge, L2 Systems & C/C++, L3 Software & Tools, L4 Creative & Media) to showcase your complete spectrum from hardware registers to creative storytelling.
-
----
-
-## 🚀 8. Testing & Deploying
+## 🚀 5. Testing & Deploying
 
 ### Test Locally:
 ```bash
 python3 -m http.server 8000
-# or
-bun run dev
-# or
-npm run dev
 # Open http://localhost:8000 in your browser
 ```
 
