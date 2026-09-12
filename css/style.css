@@ -1,61 +1,55 @@
 /* ============================================================
-   Samarth Gowda — Modern Minimal Engineering Portfolio
-   Slick typography, clean Light & Dark modes, photorealistic earth dock,
-   and zero-bloat performance.
+   Samarth Gowda — Portfolio Stylesheet
+   Directly themed after v2.elejeune.me:
+   "Ink & Iris" (Dark) / "Bone & Rust" (Light)
+   with animated pixel art electronics background canvas.
    ============================================================ */
 
-/* ---------- 1. Dark Mode (Default: Midnight Petrol & Teal) ---------- */
+/* ---------- 1. Dark Theme: Ink & Iris (Default) ---------- */
 :root,
-html[data-theme="dark"],
-html[data-theme="petrol-teal"] {
-  --bg:            #081721;
-  --bg-soft:       #0e2c40;
-  --bg-card:       #12364c;
-  --bg-card-hover: #16425c;
-  --line:          #1d495b;
-  --line-soft:     #153847;
+html[data-theme="dark"] {
+  --bg:          #0d0e12;
+  --bg-soft:     #15171d;
+  --bg-card:     #15171d;
+  --bg-card-hover: #1b1e26;
+  --line:        #252833;
+  --line-soft:   #1b1e26;
 
-  --fg:            #f2f7f9;
-  --fg-dim:        #b4cdd4;
-  --fg-faint:      #769aa4;
+  --fg:          #e4e6ec;
+  --fg-dim:      #a5aab8;
+  --fg-faint:    #7c8291;
 
-  --accent:        #148d8d;
-  --accent-hover:  #19aaaa;
-  --accent-warm:   #efbc75;
-  --accent-mint:   #c1e1a7;
-  --accent-soft:   rgba(20, 141, 141, 0.14);
-  --accent-glow:   rgba(20, 141, 141, 0.35);
+  --accent:      #8b95f0;
+  --accent-hover: #a1aaed;
+  --accent-soft: rgba(139, 149, 240, .08);
+  --accent-glow: rgba(139, 149, 240, .28);
 
-  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
-  --sidebar-w: 272px;
-  --shell-max: 88rem;
-  --radius: 12px;
-  --ease: cubic-bezier(.16, 1, .3, 1);
+  --sidebar-w: 264px;
+  --shell-max: 86rem;
+  --radius: 10px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
 }
 
-/* ---------- 2. Light Mode (Warm Parchment & Teal) ---------- */
-html[data-theme="light"],
-html[data-theme="parchment-light"] {
-  --bg:            #faf8f5;
-  --bg-soft:       #ffffff;
-  --bg-card:       #ffffff;
-  --bg-card-hover: #f5f2eb;
-  --line:          #e3ded6;
-  --line-soft:     #ede9e1;
+/* ---------- 2. Light Theme: Bone & Rust ---------- */
+html[data-theme="light"] {
+  --bg:          #f5f3ee;
+  --bg-soft:     #ffffff;
+  --bg-card:     #ffffff;
+  --bg-card-hover: #edeae2;
+  --line:        #dbd6cb;
+  --line-soft:   #e6e2d9;
 
-  --fg:            #16242c;
-  --fg-dim:        #475560;
-  --fg-faint:      #7c8a94;
+  --fg:          #1b1a17;
+  --fg-dim:      #4b4842;
+  --fg-faint:    #6f6b62;
 
-  --accent:        #127676;
-  --accent-hover:  #168a8a;
-  --accent-warm:   #c2752f;
-  --accent-mint:   #4f8872;
-  --accent-soft:   rgba(18, 118, 118, 0.08);
-  --accent-glow:   rgba(18, 118, 118, 0.22);
+  --accent:      #b0472b;
+  --accent-hover: #c45437;
+  --accent-soft: rgba(176, 71, 43, .08);
+  --accent-glow: rgba(176, 71, 43, .22);
 }
 
 /* ---------- Reset & Base ---------- */
@@ -70,7 +64,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-body);
+  font-family: var(--sans);
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -90,11 +84,11 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
+  font-family: var(--sans);
   line-height: 1.2;
   margin: 0;
   font-weight: 700;
-  letter-spacing: -.03em;
+  letter-spacing: -.025em;
 }
 
 p { margin: 0 0 1rem; }
@@ -274,32 +268,32 @@ a:hover {
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: .6rem;
-  padding: .45rem .85rem;
+  gap: .55rem;
+  align-self: flex-start;
+  padding: .35rem .75rem .35rem .55rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--bg-card);
-  color: var(--fg-dim);
-  font-family: var(--font-mono);
-  font-size: .8rem;
-  font-weight: 500;
+  background: transparent;
+  color: var(--fg-faint);
+  font: inherit;
+  font-family: var(--mono);
+  font-size: .78rem;
   cursor: pointer;
-  transition: all .2s var(--ease);
+  transition: border-color .18s var(--ease), color .18s var(--ease), background .18s var(--ease);
   width: fit-content;
 }
 .theme-toggle:hover {
   border-color: var(--accent);
   color: var(--fg);
   background: var(--accent-soft);
-  transform: translateY(-1px);
 }
-.theme-icon {
-  flex: none;
+.theme-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
 }
-html[data-theme="dark"] .icon-sun { display: none; }
-html[data-theme="dark"] .icon-moon { display: block; color: var(--accent-warm); }
-html[data-theme="light"] .icon-moon { display: none; }
-html[data-theme="light"] .icon-sun { display: block; color: var(--accent-warm); }
 
 .nav-toggle { display: none; }
 

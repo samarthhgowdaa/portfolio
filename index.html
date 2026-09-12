@@ -7,7 +7,7 @@
   <meta name="description" content="Samarth Gowda — Electrical &amp; Electronics Engineer exploring machines from raw silicon up to firmware, low-level systems, and software.">
   <meta name="author" content="Samarth Gowda">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#081721">
+  <meta name="theme-color" content="#0d0e12">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Samarth Gowda — Electrical &amp; Electronics Engineer">
@@ -17,7 +17,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
@@ -99,11 +99,10 @@
             <li><a href="https://samarthhgowdaa.github.io/feed.xml" target="_blank" rel="noopener">RSS</a></li>
           </ul>
 
-          <!-- Light / Dark Mode Toggle Button -->
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark theme" title="Toggle visual theme">
-            <svg class="theme-icon icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="theme-icon icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <span id="theme-label">Dark Mode</span>
+          <!-- Light / Dark Mode Toggle Button (v2.elejeune style dot + label) -->
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle visual theme">
+            <span class="theme-dot" aria-hidden="true"></span>
+            <span id="theme-label">Dark</span>
           </button>
         </div>
       </nav>

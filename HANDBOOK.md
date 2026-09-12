@@ -4,16 +4,34 @@ Welcome to your portfolio handbook! This website is engineered to be **lightweig
 
 ---
 
-## 🌓 1. Light Mode & Dark Mode
+## 🌓 1. Theme & Pixel Art Electronics Backdrop
 
-Your portfolio includes two custom engineering themes:
+Your portfolio features the refined styling and palette of [v2.elejeune.me](https://v2.elejeune.me/) paired with an animated retro pixel-art electronics backdrop:
 
-- **Dark Mode (Default)**: Deep midnight petrol (`#081721`), cyan teal (`#148D8D`), and warm amber (`#EFBC75`).
-- **Light Mode**: Warm editorial parchment (`#FAF8F5`), crisp white cards, and deep teal (`#127676`).
+- **Dark Mode (Default: Ink & Iris)**: Deep obsidian background (`#0d0e12`), raised cards (`#15171d`), subtle border lines (`#252833`), clean text (`#e4e6ec`), and Iris periwinkle accent (`#8b95f0`).
+- **Light Mode (Bone & Rust)**: Warm parchment background (`#f5f3ee`), pure white cards (`#ffffff`), warm borders (`#dbd6cb`), dark text (`#1b1a17`), and terracotta rust accent (`#b0472b`).
+- **Typography**: `Space Grotesk` for titles and body text, with monospace for metadata and code.
+
+### 🕹️ Pixel-Art Electronic Components Engine:
+- Floating in the background are 10 pixel-art electronic component sprites:
+  1. **DIP Microcontroller / IC** (dual pin rows, notch, pin 1 dot)
+  2. **Raspberry Pi / PCB Micro-Board** (SoC, GPIO header, USB jacks)
+  3. **Axial Resistor** (banded body with axial leads)
+  4. **Electrolytic Capacitor** (cylindrical can with negative stripe & unequal leads)
+  5. **Ceramic Disc Capacitor** ("104" disc marking & crimped leads)
+  6. **5mm Dome LED** (lens, internal die cup, cathode rim)
+  7. **TO-92 Transistor** (3 leads: E, B, C)
+  8. **HC-49 Crystal Oscillator** (16.000 MHz metal can)
+  9. **Digital Logic AND Gate** (dual inputs, curved body, output)
+  10. **Retro CRT Terminal Monitor** (phosphor screen with `>_` cursor prompt)
+- **Theme-Responsive**:
+  - In **Dark Theme**: components are drawn in crisp **white** on the dark background.
+  - In **Light Theme**: components are drawn in crisp **black** on the light background.
+- Motion is smooth and respects `prefers-reduced-motion`.
 
 ### How It Works:
 - **System-Linked by Default**: When a visitor first arrives, the site automatically detects their OS/browser preference (`prefers-color-scheme`).
-- **Manual Toggle**: Visitors can click the **Dark Mode / Light Mode** pill button in the sidebar footer to switch anytime.
+- **Manual Toggle**: Visitors can click the **Dark / Light** pill button with glowing indicator dot in the sidebar footer to switch anytime.
 - **Persistent**: The visitor's preference is saved in their browser's `localStorage`.
 
 ---
