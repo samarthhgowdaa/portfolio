@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-lede: "Things I built to understand how they work inside. Spanning low-level C, microcontroller firmware, digital circuits, and software tools."
+lede: "Things I built to understand how they work inside. Spanning renewable hardware, microcontroller firmware, low-level C, and digital logic."
 
 # ============================================================
 # CATEGORY CHIPS (EDITABLE)
@@ -11,10 +11,10 @@ lede: "Things I built to understand how they work inside. Spanning low-level C, 
 categories:
   - id: "all"
     label: "All Projects"
-  - id: "systems"
-    label: "Systems & C/C++"
   - id: "embedded"
     label: "Hardware & Embedded"
+  - id: "systems"
+    label: "Systems & C/C++"
   - id: "digital"
     label: "Digital Logic & HDL"
   - id: "web"
@@ -25,6 +25,38 @@ categories:
 # Add new projects by copying an existing block!
 # ============================================================
 projects:
+  - title: "Solar-Powered EV Charging Station with BMS"
+    link: "https://github.com/samarthhgowdaa/projects"
+    category: "embedded"
+    year: "2025"
+    description: "Integrated Lithium-ion battery storage, microcontroller, and photovoltaic panels for efficient EV charging. Developed embedded firmware for real-time monitoring of cell voltage, thermal thresholds, charge cycles, and power transfer efficiency."
+    tags:
+      - "Embedded Systems"
+      - "Battery Management"
+      - "Arduino / Microcontroller"
+      - "Renewable Energy"
+
+  - title: "Solar-Powered Public Charging Station"
+    link: "https://github.com/samarthhgowdaa/projects"
+    category: "embedded"
+    year: "2024"
+    description: "Designed a public charging facility integrating solar PV arrays, custom DC-DC buck/boost converters, and Arduino telemetry. Conducted electrical load analysis and circuit simulations in MATLAB & Simulink."
+    tags:
+      - "MATLAB"
+      - "Simulink"
+      - "Power Electronics"
+      - "DC-DC Converters"
+
+  - title: "Thermoelectric Generator using Peltier Modules"
+    link: "https://github.com/samarthhgowdaa/projects"
+    category: "embedded"
+    year: "2018"
+    description: "Harvested ambient electricity via the Seebeck effect by exploiting thermal gradients between overhead cold and hot water reserves, integrating energy storage and power management circuitry."
+    tags:
+      - "Hardware"
+      - "Seebeck Effect"
+      - "Energy Harvesting"
+
   - title: "bibliothek"
     link: "https://github.com/samarthhgowdaa/bibliothek"
     category: "systems"
@@ -47,6 +79,17 @@ projects:
       - "Pointers"
       - "Algorithms"
 
+  - title: "Digital Logic & HDL Sandbox"
+    link: "https://github.com/samarthhgowdaa/projects"
+    category: "digital"
+    year: "2026"
+    description: "Combinational and sequential digital circuit designs modeled in Verilog HDL. Includes multiplexers, finite state machines (FSM), registers, and testbench verification."
+    tags:
+      - "Verilog"
+      - "SystemVerilog"
+      - "Digital Electronics"
+      - "Simulation"
+
   - title: "Arduino & Microcontroller Labs"
     link: "https://github.com/samarthhgowdaa/arduino"
     category: "embedded"
@@ -57,17 +100,6 @@ projects:
       - "C++"
       - "Embedded"
       - "Sensors"
-
-  - title: "Digital Logic & HDL Sandbox"
-    link: "https://github.com/samarthhgowdaa/projects"
-    category: "digital"
-    year: "2026"
-    description: "Combinational and sequential digital circuit designs modeled in Verilog HDL. Includes multiplexers, finite state machines (FSM), registers, and testbench verification."
-    tags:
-      - "Verilog"
-      - "VHDL"
-      - "Digital Electronics"
-      - "Simulation"
 
   - title: "genre-picker-WebApp"
     link: "https://github.com/samarthhgowdaa/genre-picker-WebApp"

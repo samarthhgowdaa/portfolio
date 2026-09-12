@@ -18,7 +18,6 @@ OUTPUT_FILE = BASE_DIR / "index.html"
 def parse_frontmatter(file_path):
     """
     Parses a markdown file with YAML-like frontmatter into (meta_dict, body_text).
-    Robust against lists, nested dictionaries, and comments.
     """
     if not file_path.exists():
         return {}, ""
@@ -54,7 +53,6 @@ def parse_yaml_subset(lines):
     data = {}
     current_key = None
     current_list = None
-    current_obj_list = None
     current_obj = None
 
     for raw_line in lines:
@@ -64,11 +62,10 @@ def parse_yaml_subset(lines):
 
         indent = len(raw_line) - len(raw_line.lstrip())
 
-        # Check for list item
+        # List item
         if stripped.startswith("- "):
             val = stripped[2:].strip().strip('"\'')
             if ":" in val:
-                # Start of a dictionary in a list
                 k, v = val.split(":", 1)
                 k = k.strip()
                 v = v.strip().strip('"\'')
@@ -79,19 +76,17 @@ def parse_yaml_subset(lines):
                 continue
             else:
                 if current_obj is not None and current_list is not None:
-                    # Item inside an object's sublist
                     current_list.append(parse_scalar(val))
                 elif current_key and isinstance(data.get(current_key), list):
                     data[current_key].append(parse_scalar(val))
                 continue
 
-        # Check for sub-key inside current_obj (e.g. in projects or facts)
+        # Sub-key inside current_obj
         if indent >= 4 and current_obj is not None and ":" in stripped:
             k, v = stripped.split(":", 1)
             k = k.strip()
             v = v.strip().strip('"\'')
             if not v:
-                # Sublist inside object (e.g. tags or bullets or tools)
                 current_obj[k] = []
                 current_list = current_obj[k]
             else:
@@ -108,7 +103,6 @@ def parse_yaml_subset(lines):
             current_list = None
 
             if not v:
-                # Empty value means next lines are a list or nested structure
                 data[k] = []
                 current_key = k
             else:
@@ -135,9 +129,8 @@ def parse_scalar(val):
 
 def md_to_html(text):
     """
-    Very lightweight inline markdown converter for bold, italic, quotes, code, links.
+    Lightweight inline markdown converter.
     """
-    # Blockquotes
     lines = text.splitlines()
     out = []
     in_quote = False
@@ -164,19 +157,15 @@ def md_to_html(text):
 
 
 def inline_format(text):
-    # Bold **text**
     text = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', text)
-    # Italic *text*
     text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
-    # Inline code `code`
     text = re.sub(r'`(.+?)`', r'<code>\1</code>', text)
-    # Links [text](url)
     text = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
     return text
 
 
 def build_site():
-    print("Building portfolio from content/...")
+    print("Compiling portfolio from content/...")
 
     about_meta, about_body = parse_frontmatter(CONTENT_DIR / "about.md")
     focus_meta, focus_body = parse_frontmatter(CONTENT_DIR / "focus.md")
@@ -192,7 +181,11 @@ def build_site():
 
     # Location
     location_str = about_meta.get("location", "")
-    location_html = f'<span>{html.escape(location_str)}</span> · ' if location_str else '<!-- <span class="location">Bengaluru, India</span> · -->'
+    location_html = f'<span>{html.escape(location_str)}</span> · ' if location_str else '<!-- <span class="location">Hassan / Bengaluru, India</span> · -->'
+
+    # Resume button
+    resume_url = about_meta.get("resume_url", "assets/resume.pdf")
+    resume_btn_text = about_meta.get("resume_button_text", "Resume")
 
     # Facts HTML
     facts_html = ""
@@ -356,9 +349,9 @@ def build_site():
           <div class="contact-val"><a href="{c_lnk}" target="_blank" rel="noopener">{c_hdl}</a></div>
         </li>\n"""
 
-    # Generate full HTML template
+    # Full HTML Document
     full_html = f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="petrol-teal">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -366,7 +359,7 @@ def build_site():
   <meta name="description" content="Samarth Gowda — Electrical &amp; Electronics Engineer exploring machines from raw silicon up to firmware, low-level systems, and software.">
   <meta name="author" content="Samarth Gowda">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0e1013">
+  <meta name="theme-color" content="#081721">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Samarth Gowda — Electrical &amp; Electronics Engineer">
@@ -376,15 +369,15 @@ def build_site():
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    /* Prevent theme flash by detecting theme before first paint */
+    /* Instant theme restore to prevent flash of unstyled theme */
     (function () {{
       try {{
         var saved = localStorage.getItem('sg_theme');
-        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        var theme = saved || 'petrol-teal';
         document.documentElement.dataset.theme = theme;
       }} catch (e) {{}}
     }})();
@@ -452,10 +445,19 @@ def build_site():
             <li><a href="mailto:samarthac4work@gmail.com">Email</a></li>
             <li><a href="https://samarthhgowdaa.github.io/feed.xml" target="_blank" rel="noopener">RSS</a></li>
           </ul>
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle visual theme">
-            <span class="theme-dot" aria-hidden="true"></span>
-            <span id="theme-label">Dark</span>
-          </button>
+
+          <!-- Multi-Palette Theme Switcher Swatches -->
+          <div class="theme-selector">
+            <span class="theme-selector-label">Color Themes</span>
+            <div class="palette-swatches">
+              <button class="swatch-btn swatch-petrol is-active" data-theme-choice="petrol-teal" title="Petrol &amp; Teal (Uploaded)" aria-label="Petrol and Teal theme"></button>
+              <button class="swatch-btn swatch-moon" data-theme-choice="moon-slate" title="Moon Phases (Uploaded)" aria-label="Moon Phases theme"></button>
+              <button class="swatch-btn swatch-marine" data-theme-choice="cyber-marine" title="Cyber Marine (Uploaded)" aria-label="Cyber Marine theme"></button>
+              <button class="swatch-btn swatch-retro" data-theme-choice="retro-artsy" title="Retro Artsy (Uploaded)" aria-label="Retro Artsy theme"></button>
+              <button class="swatch-btn swatch-obsidian" data-theme-choice="obsidian-copper" title="Obsidian &amp; Copper" aria-label="Obsidian and Copper theme"></button>
+              <button class="swatch-btn swatch-light" data-theme-choice="parchment-light" title="Parchment Light" aria-label="Light mode"></button>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
@@ -491,6 +493,10 @@ def build_site():
         <p class="cta">
           <a class="btn btn-primary" href="#projects">Explore Projects</a>
           <a class="btn" href="mailto:samarthac4work@gmail.com">Get in Touch</a>
+          <a class="btn btn-resume" href="{resume_url}" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>{resume_btn_text}</span>
+          </a>
         </p>
       </section>
 
@@ -570,7 +576,7 @@ def build_site():
         </p>
       </section>
 
-      <!-- ───────────────────────── BOTTOM VISITOR DOCK & 3D GLOBE ───────────────────────── -->
+      <!-- ───────────────────────── BOTTOM VISITOR DOCK & PHOTOREALISTIC EARTH ───────────────────────── -->
       <aside class="bottom-dock" aria-label="Visitor telemetry and profile statistics">
         <div class="dock-left">
           <div class="dock-status">
@@ -584,8 +590,8 @@ def build_site():
           <p class="dock-sub">Hand-crafted semantic HTML5 &amp; modern CSS &bull; Hosted on GitHub Pages &bull; Zero external frameworks</p>
         </div>
 
-        <div class="dock-right" title="Interactive 3D Dotted Globe — Drag to spin">
-          <canvas id="globe-canvas" width="110" height="110"></canvas>
+        <div class="dock-right" title="Interactive 3D Photorealistic Earth — Drag to spin">
+          <canvas id="globe-canvas" width="130" height="130"></canvas>
         </div>
       </aside>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="petrol-teal">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
   <meta name="description" content="Samarth Gowda — Electrical &amp; Electronics Engineer exploring machines from raw silicon up to firmware, low-level systems, and software.">
   <meta name="author" content="Samarth Gowda">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0e1013">
+  <meta name="theme-color" content="#081721">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Samarth Gowda — Electrical &amp; Electronics Engineer">
@@ -17,15 +17,15 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    /* Prevent theme flash by detecting theme before first paint */
+    /* Instant theme restore to prevent flash of unstyled theme */
     (function () {
       try {
         var saved = localStorage.getItem('sg_theme');
-        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        var theme = saved || 'petrol-teal';
         document.documentElement.dataset.theme = theme;
       } catch (e) {}
     })();
@@ -93,10 +93,19 @@
             <li><a href="mailto:samarthac4work@gmail.com">Email</a></li>
             <li><a href="https://samarthhgowdaa.github.io/feed.xml" target="_blank" rel="noopener">RSS</a></li>
           </ul>
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle visual theme">
-            <span class="theme-dot" aria-hidden="true"></span>
-            <span id="theme-label">Dark</span>
-          </button>
+
+          <!-- Multi-Palette Theme Switcher Swatches -->
+          <div class="theme-selector">
+            <span class="theme-selector-label">Color Themes</span>
+            <div class="palette-swatches">
+              <button class="swatch-btn swatch-petrol is-active" data-theme-choice="petrol-teal" title="Petrol &amp; Teal (Uploaded)" aria-label="Petrol and Teal theme"></button>
+              <button class="swatch-btn swatch-moon" data-theme-choice="moon-slate" title="Moon Phases (Uploaded)" aria-label="Moon Phases theme"></button>
+              <button class="swatch-btn swatch-marine" data-theme-choice="cyber-marine" title="Cyber Marine (Uploaded)" aria-label="Cyber Marine theme"></button>
+              <button class="swatch-btn swatch-retro" data-theme-choice="retro-artsy" title="Retro Artsy (Uploaded)" aria-label="Retro Artsy theme"></button>
+              <button class="swatch-btn swatch-obsidian" data-theme-choice="obsidian-copper" title="Obsidian &amp; Copper" aria-label="Obsidian and Copper theme"></button>
+              <button class="swatch-btn swatch-light" data-theme-choice="parchment-light" title="Parchment Light" aria-label="Light mode"></button>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
@@ -107,7 +116,7 @@
       <!-- ───────────────────────── 01 ABOUT ───────────────────────── -->
       <section id="about" class="section hero">
         <p class="eyebrow">
-          <!-- <span class="location">Bengaluru, India</span> · -->
+          <!-- <span class="location">Hassan / Bengaluru, India</span> · -->
           <span class="pulse" aria-hidden="true"></span>
           <span>Open to collaborate &amp; talk</span>
         </p>
@@ -123,21 +132,25 @@
         -->
 
         <div class="about-copy">
-<p>Hey there! I'm <b>Samarth</b>, an Electrical & Electronics Engineer who loves understanding how things work from the bare metal up.</p>
+<p>Hey there! I'm <b>Samarth</b>, an Electrical & Electronics Engineer who loves understanding how machines tick from the bare silicon and firmware up to high-level software.</p>
 <div class="quote-box"><p><em>"To truly love a machine, one must open it, understand its heart, its design & its soul."</em></p></div>
-<p>I design and build whatever I can imagine and dream—bridging the gap between raw silicon, microcontroller firmware, and software. Whether it's writing drivers for an ESP32, exploring digital logic in Verilog, writing C from scratch, or configuring custom Linux workflows on Fedora KDE, I believe the best way to understand technology is to build it ourselves.</p>
+<p>I design and build whatever I can imagine—from solar-powered EV battery monitoring systems and bare-metal microcontroller drivers to digital circuits in Verilog and custom C applications from scratch. Sometimes I like to take apart electronic devices and fix them; the probability of them working again is about 70%, but it's always worth the exploration and learning.</p>
         </div>
 
         <ul class="facts">
         <li><b>Embedded &amp; Hardware</b><span>ESP32, STM32, Arduino, Raspberry Pi</span></li>
-        <li><b>Systems &amp; Low-Level</b><span>C, C++, Verilog, VHDL, Python</span></li>
+        <li><b>Systems &amp; Low-Level</b><span>C, C++, Verilog, SystemVerilog, Python</span></li>
         <li><b>OS &amp; Environment</b><span>Fedora KDE, Pop!_OS, Ubuntu, Linux CLI</span></li>
-        <li><b>Design &amp; Craft</b><span>Digital Electronics, Tooling, Video Editing</span></li>
+        <li><b>Design &amp; Craft</b><span>Digital Logic, EDA / KiCAD, Video Editing</span></li>
         </ul>
 
         <p class="cta">
           <a class="btn btn-primary" href="#projects">Explore Projects</a>
           <a class="btn" href="mailto:samarthac4work@gmail.com">Get in Touch</a>
+          <a class="btn btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Resume</span>
+          </a>
         </p>
       </section>
 
@@ -180,26 +193,26 @@
          ============================================================
     <section id="experience" class="section">
       <h2 class="section-title"><i>02b</i>Experience</h2>
-      <p class="section-lede">Engineering roles, internships, and research projects.</p>
+      <p class="section-lede">Engineering internships, technical leadership, and creative production.</p>
       <ol class="timeline">
         <li class="tl-item">
-          <div class="tl-when">2026 — Present</div>
+          <div class="tl-when">03/2026 — 06/2026</div>
           <div class="tl-what">
-            <h3>Embedded Systems Engineer <span class="at">Company Name</span></h3>
-            <p class="tl-where">Bengaluru, India</p>
-            <p>Developing firmware and peripheral drivers for ARM microcontrollers and embedded Linux gateways.</p>
-            <ul class="bullets"><li>Wrote bare-metal device drivers for SPI, I2C, and UART communications.</li><li>Optimized interrupt handlers and low-power sleep modes for battery-operated sensors.</li><li>Integrated hardware-in-the-loop (HIL) automated test benches.</li></ul>
-            <ul class="tags"><li>C</li><li>C++</li><li>STM32</li><li>ESP32</li><li>FreeRTOS</li><li>Git</li></ul>
+            <h3>Design &amp; Verification Intern <span class="at">Nexus Core Innovations</span></h3>
+            <p class="tl-where">Remote</p>
+            <p>Completed VLSI internship focusing on digital logic design, testbench simulation, and verification.</p>
+            <ul class="bullets"><li>Simulated and validated digital modules using Verilog and modern EDA workflows.</li><li>Authored comprehensive verification testbenches to identify edge-case timing and logic bugs.</li></ul>
+            <ul class="tags"><li>Verilog</li><li>VLSI</li><li>Verification</li><li>Digital Design</li><li>EDA</li></ul>
           </div>
         </li>
         <li class="tl-item">
-          <div class="tl-when">2025 — 2026</div>
+          <div class="tl-when">03/2025 — Present</div>
           <div class="tl-what">
-            <h3>Hardware &amp; Firmware Intern <span class="at">Robotics / Tech Lab</span></h3>
-            <p class="tl-where">Bengaluru, India</p>
-            <p>Assisted in circuit schematic review, PCB prototyping, and microcontroller bring-up.</p>
-            <ul class="bullets"><li>Designed schematic layouts and validated power rail stability using oscilloscopes.</li><li>Implemented motor control PWM algorithms on Arduino and ESP32 platforms.</li></ul>
-            <ul class="tags"><li>Embedded C</li><li>Arduino</li><li>Digital Logic</li><li>Oscilloscope</li></ul>
+            <h3>Multimedia Creator &amp; Video Editor <span class="at">Independent / Remote</span></h3>
+            <p class="tl-where">Hassan / Remote</p>
+            <p>End-to-end video post-production for personal and client YouTube channels using DaVinci Resolve.</p>
+            <ul class="bullets"><li>Edited long-form and short-form video content emphasizing narrative pacing, storytelling, and sound design.</li><li>Established efficient digital media production workflows, color grading pipelines, and publishing schedules.</li></ul>
+            <ul class="tags"><li>DaVinci Resolve</li><li>Video Editing</li><li>Color Grading</li><li>Content Strategy</li></ul>
           </div>
         </li>
       </ol>
@@ -209,19 +222,37 @@
       <!-- ───────────────────────── 03 PROJECTS ───────────────────────── -->
       <section id="projects" class="section">
         <h2 class="section-title"><i>03</i>Projects</h2>
-        <p class="section-lede">Things I built to understand how they work inside. Spanning low-level C, microcontroller firmware, digital circuits, and software tools.</p>
+        <p class="section-lede">Things I built to understand how they work inside. Spanning renewable hardware, microcontroller firmware, low-level C, and digital logic.</p>
 
         <!-- Category Filters -->
         <div class="filters" role="group" aria-label="Filter projects by category">
         <button class="chip is-active" data-filter="all">All Projects</button>
-        <button class="chip" data-filter="systems">Systems &amp; C/C++</button>
         <button class="chip" data-filter="embedded">Hardware &amp; Embedded</button>
+        <button class="chip" data-filter="systems">Systems &amp; C/C++</button>
         <button class="chip" data-filter="digital">Digital Logic &amp; HDL</button>
         <button class="chip" data-filter="web">Web &amp; Tools</button>
         </div>
 
         <!-- Project Grid -->
         <div class="grid" id="project-grid">
+        <div class="card" data-category="embedded">
+          <span class="card-year">2025</span>
+          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Solar-Powered EV Charging Station with BMS</a></h3>
+          <p>Integrated Lithium-ion battery storage, microcontroller, and photovoltaic panels for efficient EV charging. Developed embedded firmware for real-time monitoring of cell voltage, thermal thresholds, charge cycles, and power transfer efficiency.</p>
+          <ul class="tags"><li>Embedded Systems</li><li>Battery Management</li><li>Arduino / Microcontroller</li><li>Renewable Energy</li></ul>
+        </div>
+        <div class="card" data-category="embedded">
+          <span class="card-year">2024</span>
+          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Solar-Powered Public Charging Station</a></h3>
+          <p>Designed a public charging facility integrating solar PV arrays, custom DC-DC buck/boost converters, and Arduino telemetry. Conducted electrical load analysis and circuit simulations in MATLAB &amp; Simulink.</p>
+          <ul class="tags"><li>MATLAB</li><li>Simulink</li><li>Power Electronics</li><li>DC-DC Converters</li></ul>
+        </div>
+        <div class="card" data-category="embedded">
+          <span class="card-year">2018</span>
+          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Thermoelectric Generator using Peltier Modules</a></h3>
+          <p>Harvested ambient electricity via the Seebeck effect by exploiting thermal gradients between overhead cold and hot water reserves, integrating energy storage and power management circuitry.</p>
+          <ul class="tags"><li>Hardware</li><li>Seebeck Effect</li><li>Energy Harvesting</li></ul>
+        </div>
         <div class="card" data-category="systems">
           <span class="card-year">2026</span>
           <h3><a href="https://github.com/samarthhgowdaa/bibliothek" target="_blank" rel="noopener">bibliothek</a></h3>
@@ -234,17 +265,17 @@
           <p>Deep dive into low-level systems programming in C from scratch. Exploring manual memory management, pointer arithmetic, struct alignment, and custom data structures.</p>
           <ul class="tags"><li>C</li><li>Memory Management</li><li>Pointers</li><li>Algorithms</li></ul>
         </div>
+        <div class="card" data-category="digital">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Digital Logic &amp; HDL Sandbox</a></h3>
+          <p>Combinational and sequential digital circuit designs modeled in Verilog HDL. Includes multiplexers, finite state machines (FSM), registers, and testbench verification.</p>
+          <ul class="tags"><li>Verilog</li><li>SystemVerilog</li><li>Digital Electronics</li><li>Simulation</li></ul>
+        </div>
         <div class="card" data-category="embedded">
           <span class="card-year">2025</span>
           <h3><a href="https://github.com/samarthhgowdaa/arduino" target="_blank" rel="noopener">Arduino &amp; Microcontroller Labs</a></h3>
           <p>Hands-on embedded experimentation with microcontrollers: hardware timers, interrupt service routines, sensor bus interfacing (I2C/SPI), and peripheral control.</p>
           <ul class="tags"><li>Arduino</li><li>C++</li><li>Embedded</li><li>Sensors</li></ul>
-        </div>
-        <div class="card" data-category="digital">
-          <span class="card-year">2026</span>
-          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Digital Logic &amp; HDL Sandbox</a></h3>
-          <p>Combinational and sequential digital circuit designs modeled in Verilog HDL. Includes multiplexers, finite state machines (FSM), registers, and testbench verification.</p>
-          <ul class="tags"><li>Verilog</li><li>VHDL</li><li>Digital Electronics</li><li>Simulation</li></ul>
         </div>
         <div class="card" data-category="web">
           <span class="card-year">2026</span>
@@ -308,22 +339,42 @@
 
         <ol class="edu-list">
         <li class="edu-item">
-          <div class="edu-when">2023 — Present</div>
+          <div class="edu-when">03/2026 — 07/2026</div>
           <div class="edu-what">
-            <h3>B.E. in Electrical &amp; Electronics Engineering</h3>
-            <div class="edu-institution">Engineering College / University &bull; Bengaluru, India</div>
-            <p>In-depth study of electrical circuits, semiconductor devices, digital electronics, microprocessors, and control systems.</p>
-            <ul class="bullets"><li>Hands-on laboratory coursework in Digital Electronics, Microcontrollers, and Hardware Simulation.</li><li>Project work involving sensor networks, microcontroller interfacing, and HDL logic modeling.</li></ul>
-            <p style="margin-top: .6rem; margin-bottom: .3rem; font-size: .84rem; font-weight: 600; color: var(--fg-dim);">Key Coursework:</p><ul class="tags"><li>Digital System Design</li><li>Microprocessors &amp; Microcontrollers</li><li>Signals &amp; Systems</li><li>Linear Integrated Circuits</li><li>Control Systems</li><li>Computer Architecture</li></ul>
+            <h3>Post Graduate Diploma in VLSI Design &amp; Verification</h3>
+            <div class="edu-institution">International Institute of Information Technology Bangalore (IIITB) &bull; Bengaluru, India</div>
+            <p>Specialized study in advanced digital design, ASIC/FPGA architecture, SystemVerilog, and formal verification methodologies.</p>
+            <ul class="bullets"><li>Focus on digital hardware modeling, timing closure, synthesis, and verification.</li></ul>
+            <p style="margin-top: .6rem; margin-bottom: .3rem; font-size: .84rem; font-weight: 600; color: var(--fg-dim);">Key Coursework:</p><ul class="tags"><li>VLSI System Design</li><li>SystemVerilog</li><li>Digital Verification</li><li>FPGA Architectures</li></ul>
           </div>
         </li>
         <li class="edu-item">
-          <div class="edu-when">2021 — 2023</div>
+          <div class="edu-when">12/2022 — 06/2026</div>
           <div class="edu-what">
-            <h3>Pre-University / Senior Secondary Education (PCMB)</h3>
-            <div class="edu-institution">Pre-University College &bull; Karnataka, India</div>
-            <p>Focus on Physics, Chemistry, Mathematics, and foundational sciences.</p>
-            <ul class="bullets"><li>Deepened interest in electronics, analytical mathematics, and mechanics.</li></ul>
+            <h3>B.E. in Electrical &amp; Electronics Engineering</h3>
+            <div class="edu-institution">Government Engineering College Mosalehosahalli &bull; Hassan, Karnataka</div>
+            <p>Comprehensive engineering curriculum across electrical power, microcontrollers, control systems, and electronics. CGPA: 7.9 / 10.</p>
+            <ul class="bullets"><li>President &amp; Founder of ELECTROSPHERE &amp; VEDA (VLSI &amp; Embedded Design Association).</li><li>Branch Cultural Head &amp; Placement Co-ordinator.</li><li>Hands-on laboratory capstones in embedded control, circuit simulation, and power systems.</li></ul>
+            <p style="margin-top: .6rem; margin-bottom: .3rem; font-size: .84rem; font-weight: 600; color: var(--fg-dim);">Key Coursework:</p><ul class="tags"><li>Digital System Design</li><li>Microprocessors &amp; Microcontrollers</li><li>Signals &amp; Systems</li><li>Linear Integrated Circuits</li><li>Control Systems</li><li>Circuit Simulation &amp; EDA</li></ul>
+          </div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-when">2020 — 2022</div>
+          <div class="edu-what">
+            <h3>Higher Secondary Education (PCMB)</h3>
+            <div class="edu-institution">Times P.U. College &bull; C.R. Patna, Karnataka</div>
+            <p>Pre-university curriculum focusing on Physics, Chemistry, Mathematics, and Biology. CGPA: 8.2 / 10.</p>
+            <ul class="bullets"><li>Developed strong analytical foundations in physics, mathematics, and logic.</li></ul>
+            
+          </div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-when">2019 — 2020</div>
+          <div class="edu-what">
+            <h3>Secondary School Leaving Certificate (S.S.L.C)</h3>
+            <div class="edu-institution">Government High School Megalakeri &bull; C.R. Patna, Karnataka</div>
+            <p>Core secondary education with academic distinction. CGPA: 9.0 / 10.</p>
+            <ul class="bullets"><li>Elected School President — Led student body and school activities.</li></ul>
             
           </div>
         </li>
@@ -333,49 +384,49 @@
       <!-- ───────────────────────── 06 CERTIFICATIONS ───────────────────────── -->
       <section id="certifications" class="section">
         <h2 class="section-title"><i>06</i>Certifications</h2>
-        <p class="section-lede">Verified technical credentials, online specializations, and professional courses.</p>
+        <p class="section-lede">Verified technical credentials, specialized hardware workshops, and professional courses.</p>
 
         <div class="certs-grid">
         <div class="cert-card">
           <div class="cert-preview">
-            <img src="assets/certs/cert-embedded.svg" alt="Embedded Systems &amp; Microcontroller Architecture Preview" loading="lazy">
+            <img src="assets/certs/cert-embedded.svg" alt="Advanced Drone Technology (Air Taxi) Workshop Preview" loading="lazy">
           </div>
           <div class="cert-info">
             <div class="cert-meta">
-              <span>Coursera / University Specialization</span>
-              <span>2026</span>
+              <span>Bharat Space Education Research Centre</span>
+              <span>2025</span>
+            </div>
+            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Advanced Drone Technology (Air Taxi) Workshop</a></h3>
+            <div class="cert-issuer">ID: <code>BSERC-DRONE-094</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>UAV Aerodynamics</li><li>Flight Controllers</li><li>Telemetry &amp; Avionics</li></ul>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-preview">
+            <img src="assets/certs/cert-verilog.svg" alt="Summer School on Digital Hardware Design with Verilog Preview" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <div class="cert-meta">
+              <span>IEEE Bangalore Section</span>
+              <span>2025</span>
+            </div>
+            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Summer School on Digital Hardware Design with Verilog</a></h3>
+            <div class="cert-issuer">ID: <code>IEEE-VLOG-2025</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>Verilog HDL</li><li>FPGA Synthesis</li><li>FSM &amp; Timing Analysis</li></ul>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-preview">
+            <img src="assets/certs/cert-c.svg" alt="Embedded Systems &amp; Microcontroller Architecture Preview" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <div class="cert-meta">
+              <span>University / Online Specialization</span>
+              <span>2025</span>
             </div>
             <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Embedded Systems &amp; Microcontroller Architecture</a></h3>
-            <div class="cert-issuer">ID: <code>CERT-EMB-8492</code></div>
-            <ul class="tags" style="margin-top: auto;"><li>ARM Cortex-M</li><li>Embedded C</li><li>RTOS Basics</li></ul>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="cert-preview">
-            <img src="assets/certs/cert-verilog.svg" alt="Digital System Design with Verilog Preview" loading="lazy">
-          </div>
-          <div class="cert-info">
-            <div class="cert-meta">
-              <span>NPTEL / IEEE Online Course</span>
-              <span>2025</span>
-            </div>
-            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Digital System Design with Verilog</a></h3>
-            <div class="cert-issuer">ID: <code>CERT-VLOG-3109</code></div>
-            <ul class="tags" style="margin-top: auto;"><li>Verilog HDL</li><li>FPGA Synthesis</li><li>Sequential Logic</li></ul>
-          </div>
-        </div>
-        <div class="cert-card">
-          <div class="cert-preview">
-            <img src="assets/certs/cert-c.svg" alt="C Programming &amp; Memory Architecture Preview" loading="lazy">
-          </div>
-          <div class="cert-info">
-            <div class="cert-meta">
-              <span>Technical Academy / Platform</span>
-              <span>2025</span>
-            </div>
-            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">C Programming &amp; Memory Architecture</a></h3>
-            <div class="cert-issuer">ID: <code>CERT-CPRG-5812</code></div>
-            <ul class="tags" style="margin-top: auto;"><li>C</li><li>Pointers &amp; Memory</li><li>Data Structures</li></ul>
+            <div class="cert-issuer">ID: <code>EMB-ARCH-5812</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>ARM Cortex-M</li><li>Bare-Metal C</li><li>Hardware Interfacing</li></ul>
           </div>
         </div>
         </div>
@@ -410,7 +461,7 @@
         </p>
       </section>
 
-      <!-- ───────────────────────── BOTTOM VISITOR DOCK & 3D GLOBE ───────────────────────── -->
+      <!-- ───────────────────────── BOTTOM VISITOR DOCK & PHOTOREALISTIC EARTH ───────────────────────── -->
       <aside class="bottom-dock" aria-label="Visitor telemetry and profile statistics">
         <div class="dock-left">
           <div class="dock-status">
@@ -424,8 +475,8 @@
           <p class="dock-sub">Hand-crafted semantic HTML5 &amp; modern CSS &bull; Hosted on GitHub Pages &bull; Zero external frameworks</p>
         </div>
 
-        <div class="dock-right" title="Interactive 3D Dotted Globe — Drag to spin">
-          <canvas id="globe-canvas" width="110" height="110"></canvas>
+        <div class="dock-right" title="Interactive 3D Photorealistic Earth — Drag to spin">
+          <canvas id="globe-canvas" width="130" height="130"></canvas>
         </div>
       </aside>
 

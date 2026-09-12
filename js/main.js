@@ -1,59 +1,64 @@
 /**
- * Samarth Gowda — Portfolio Main Logic
- * System theme auto-detection, scrollspy, interactive filters, mobile nav,
- * and ambient hardware signal matrix backdrop.
+ * Samarth Gowda — Modern Portfolio Main Logic
+ * Multi-palette theme switcher, scrollspy, interactive project filters,
+ * mobile drawer, and ambient hardware signal matrix.
  */
 (function () {
   'use strict';
 
   var root = document.documentElement;
 
-  // ---------- Theme Switcher (Defaults to System Theme) ----------
-  var themeBtn   = document.getElementById('theme-toggle');
-  var themeLabel = document.getElementById('theme-label');
+  // ============================================================
+  // Multi-Palette Theme Switcher
+  // ============================================================
+  var swatches = Array.prototype.slice.call(document.querySelectorAll('.swatch-btn[data-theme-choice]'));
 
-  function getSystemTheme() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-      ? 'light'
-      : 'dark';
-  }
+  var THEMES = {
+    'petrol-teal':     '#081721',
+    'moon-slate':      '#161c22',
+    'cyber-marine':    '#181a36',
+    'retro-artsy':     '#15161c',
+    'obsidian-copper': '#0e1013',
+    'parchment-light': '#faf8f5'
+  };
 
-  function applyTheme(theme) {
-    root.dataset.theme = theme;
-    if (themeLabel) themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
-    if (themeBtn) themeBtn.setAttribute('aria-pressed', String(theme === 'light'));
+  function applyTheme(themeName) {
+    if (!THEMES[themeName]) themeName = 'petrol-teal';
+    root.dataset.theme = themeName;
+
+    swatches.forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.dataset.themeChoice === themeName);
+    });
 
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute('content', theme === 'dark' ? '#0e1013' : '#faf8f5');
+      meta.setAttribute('content', THEMES[themeName]);
     }
   }
 
   // Initial theme resolution
   var savedTheme = null;
   try { savedTheme = localStorage.getItem('sg_theme'); } catch (e) {}
-  var initialTheme = savedTheme || getSystemTheme();
-  applyTheme(initialTheme);
 
-  // Listen to system preference changes if user hasn't explicitly set an override
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
-      if (!localStorage.getItem('sg_theme')) {
-        applyTheme(e.matches ? 'light' : 'dark');
-      }
-    });
+  if (savedTheme && THEMES[savedTheme]) {
+    applyTheme(savedTheme);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    applyTheme('parchment-light');
+  } else {
+    applyTheme('petrol-teal'); // Default: user's uploaded palette!
   }
 
-  if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      var current = root.dataset.theme === 'light' ? 'light' : 'dark';
-      var next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      try { localStorage.setItem('sg_theme', next); } catch (e) {}
+  swatches.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var choice = btn.dataset.themeChoice;
+      applyTheme(choice);
+      try { localStorage.setItem('sg_theme', choice); } catch (e) {}
     });
-  }
+  });
 
-  // ---------- Mobile Navigation Drawer ----------
+  // ============================================================
+  // Mobile Navigation Drawer
+  // ============================================================
   var navToggle = document.getElementById('nav-toggle');
   var nav       = document.getElementById('nav');
 
@@ -78,7 +83,9 @@
     });
   }
 
-  // ---------- Scrollspy (Active Section Tracker) ----------
+  // ============================================================
+  // Scrollspy (Active Section Tracker)
+  // ============================================================
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('a[data-nav]'));
   var sections = navLinks
     .map(function (a) { return document.querySelector(a.getAttribute('href')); })
@@ -90,7 +97,7 @@
     function syncScrollspy() {
       ticking = false;
       var triggerLine = window.innerHeight * 0.32;
-      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 6;
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
       var activeSection = atBottom ? sections[sections.length - 1] : sections[0];
 
       if (!atBottom) {
@@ -118,7 +125,9 @@
     syncScrollspy();
   }
 
-  // ---------- Project Category Filters ----------
+  // ============================================================
+  // Project Category Filters
+  // ============================================================
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('#project-grid .card'));
   var emptyMsg = document.getElementById('grid-empty');
@@ -143,7 +152,9 @@
     });
   }
 
-  // ---------- Ambient Hardware Trace / Pixel Grid Canvas ----------
+  // ============================================================
+  // Ambient Hardware Trace Matrix
+  // ============================================================
   var bgCanvas = document.getElementById('bg-canvas');
   if (bgCanvas) {
     var bgCtx = bgCanvas.getContext('2d');
@@ -160,7 +171,6 @@
     window.addEventListener('resize', resizeBg);
     resizeBg();
 
-    // Pulse packets moving along grid lines
     var gridSize = 42;
 
     function spawnPulse() {
@@ -173,7 +183,7 @@
         y: y,
         vx: isHorizontal ? (Math.random() > 0.5 ? 1.2 : -1.2) : 0,
         vy: !isHorizontal ? (Math.random() > 0.5 ? 1.2 : -1.2) : 0,
-        length: Math.floor(Math.random() * 20) + 15,
+        length: Math.floor(Math.random() * 20) + 16,
         life: 0,
         maxLife: Math.floor(Math.random() * 120) + 80
       });
@@ -182,16 +192,14 @@
     function renderBg() {
       bgCtx.clearRect(0, 0, w, h);
 
-      var isDark = root.dataset.theme !== 'light';
+      var isDark = root.dataset.theme !== 'parchment-light' && root.dataset.theme !== 'light';
       var style = getComputedStyle(root);
-      var accent = style.getPropertyValue('--accent').trim() || '#e58a4e';
+      var accent = style.getPropertyValue('--accent').trim() || '#148d8d';
 
-      // Subtle grid intersections (pixels)
-      bgCtx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.035)' : 'rgba(0, 0, 0, 0.035)';
-      var startX = 0;
-      var startY = 0;
-      for (var gx = startX; gx < w; gx += gridSize) {
-        for (var gy = startY; gy < h; gy += gridSize) {
+      // Grid intersection dots
+      bgCtx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)';
+      for (var gx = 0; gx < w; gx += gridSize) {
+        for (var gy = 0; gy < h; gy += gridSize) {
           bgCtx.fillRect(gx - 0.75, gy - 0.75, 1.5, 1.5);
         }
       }
@@ -208,7 +216,7 @@
           pulse.life++;
 
           var fade = Math.sin((pulse.life / pulse.maxLife) * Math.PI);
-          bgCtx.globalAlpha = Math.max(0, fade * (isDark ? 0.22 : 0.16));
+          bgCtx.globalAlpha = Math.max(0, fade * (isDark ? 0.24 : 0.16));
           bgCtx.lineWidth = 1.4;
 
           bgCtx.beginPath();
@@ -216,7 +224,6 @@
           bgCtx.lineTo(pulse.x - pulse.vx * pulse.length, pulse.y - pulse.vy * pulse.length);
           bgCtx.stroke();
 
-          // Small head dot
           bgCtx.fillStyle = accent;
           bgCtx.beginPath();
           bgCtx.arc(pulse.x, pulse.y, 1.8, 0, Math.PI * 2);

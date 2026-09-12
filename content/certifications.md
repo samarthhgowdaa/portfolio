@@ -1,6 +1,6 @@
 ---
 title: "Certifications"
-lede: "Verified technical credentials, online specializations, and professional courses."
+lede: "Verified technical credentials, specialized hardware workshops, and professional courses."
 
 # ============================================================
 # CERTIFICATIONS LIST
@@ -9,36 +9,36 @@ lede: "Verified technical credentials, online specializations, and professional 
 # link: Direct URL to credential verification page
 # ============================================================
 certificates:
-  - title: "Embedded Systems & Microcontroller Architecture"
-    issuer: "Coursera / University Specialization"
-    date: "2026"
+  - title: "Advanced Drone Technology (Air Taxi) Workshop"
+    issuer: "Bharat Space Education Research Centre"
+    date: "2025"
     link: "https://www.linkedin.com/in/samarthhgowdaa/"
     image: "assets/certs/cert-embedded.svg"
-    credential_id: "CERT-EMB-8492"
+    credential_id: "BSERC-DRONE-094"
     skills:
-      - "ARM Cortex-M"
-      - "Embedded C"
-      - "RTOS Basics"
+      - "UAV Aerodynamics"
+      - "Flight Controllers"
+      - "Telemetry & Avionics"
 
-  - title: "Digital System Design with Verilog"
-    issuer: "NPTEL / IEEE Online Course"
+  - title: "Summer School on Digital Hardware Design with Verilog"
+    issuer: "IEEE Bangalore Section"
     date: "2025"
     link: "https://www.linkedin.com/in/samarthhgowdaa/"
     image: "assets/certs/cert-verilog.svg"
-    credential_id: "CERT-VLOG-3109"
+    credential_id: "IEEE-VLOG-2025"
     skills:
       - "Verilog HDL"
       - "FPGA Synthesis"
-      - "Sequential Logic"
+      - "FSM & Timing Analysis"
 
-  - title: "C Programming & Memory Architecture"
-    issuer: "Technical Academy / Platform"
+  - title: "Embedded Systems & Microcontroller Architecture"
+    issuer: "University / Online Specialization"
     date: "2025"
     link: "https://www.linkedin.com/in/samarthhgowdaa/"
     image: "assets/certs/cert-c.svg"
-    credential_id: "CERT-CPRG-5812"
+    credential_id: "EMB-ARCH-5812"
     skills:
-      - "C"
-      - "Pointers & Memory"
-      - "Data Structures"
+      - "ARM Cortex-M"
+      - "Bare-Metal C"
+      - "Hardware Interfacing"
 ---

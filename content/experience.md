@@ -3,39 +3,37 @@
 enabled: false
 
 title: "Experience"
-lede: "Engineering roles, internships, and research projects."
+lede: "Engineering internships, technical leadership, and creative production."
 
 items:
-  - role: "Embedded Systems Engineer"
-    company: "Company Name"
-    location: "Bengaluru, India"
-    period: "2026 — Present"
-    description: "Developing firmware and peripheral drivers for ARM microcontrollers and embedded Linux gateways."
+  - role: "Design & Verification Intern"
+    company: "Nexus Core Innovations"
+    location: "Remote"
+    period: "03/2026 — 06/2026"
+    description: "Completed VLSI internship focusing on digital logic design, testbench simulation, and verification."
     bullets:
-      - "Wrote bare-metal device drivers for SPI, I2C, and UART communications."
-      - "Optimized interrupt handlers and low-power sleep modes for battery-operated sensors."
-      - "Integrated hardware-in-the-loop (HIL) automated test benches."
+      - "Simulated and validated digital modules using Verilog and modern EDA workflows."
+      - "Authored comprehensive verification testbenches to identify edge-case timing and logic bugs."
     tags:
-      - "C"
-      - "C++"
-      - "STM32"
-      - "ESP32"
-      - "FreeRTOS"
-      - "Git"
+      - "Verilog"
+      - "VLSI"
+      - "Verification"
+      - "Digital Design"
+      - "EDA"
 
-  - role: "Hardware & Firmware Intern"
-    company: "Robotics / Tech Lab"
-    location: "Bengaluru, India"
-    period: "2025 — 2026"
-    description: "Assisted in circuit schematic review, PCB prototyping, and microcontroller bring-up."
+  - role: "Multimedia Creator & Video Editor"
+    company: "Independent / Remote"
+    location: "Hassan / Remote"
+    period: "03/2025 — Present"
+    description: "End-to-end video post-production for personal and client YouTube channels using DaVinci Resolve."
     bullets:
-      - "Designed schematic layouts and validated power rail stability using oscilloscopes."
-      - "Implemented motor control PWM algorithms on Arduino and ESP32 platforms."
+      - "Edited long-form and short-form video content emphasizing narrative pacing, storytelling, and sound design."
+      - "Established efficient digital media production workflows, color grading pipelines, and publishing schedules."
     tags:
-      - "Embedded C"
-      - "Arduino"
-      - "Digital Logic"
-      - "Oscilloscope"
+      - "DaVinci Resolve"
+      - "Video Editing"
+      - "Color Grading"
+      - "Content Strategy"
 ---
 
 # Instructions:

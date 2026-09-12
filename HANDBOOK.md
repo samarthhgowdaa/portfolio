@@ -1,17 +1,70 @@
 # Portfolio Maintenance Handbook 🛠️
 
-Welcome to your portfolio handbook! This website was engineered to be **lightweight, warm, ultra-fast, and completely editable in Markdown**—just like writing posts for Chirpy / Jekyll.
+Welcome to your portfolio handbook! This website is engineered to be **lightweight, slick, ultra-fast, and completely editable in Markdown**—just like writing posts for Chirpy / Jekyll.
 
 ---
 
-## 🚀 Quick Start: How to Edit & Update
+## 🎨 1. Color Schemes & Live Theme Switcher
 
-All the text, projects, blogs, and settings live in the `content/` folder as clean Markdown (`.md`) files:
+Your portfolio comes pre-configured with **5 distinct, high-contrast engineering color palettes** inspired by the palettes you uploaded, plus a warm light mode:
+
+| Palette Name | Key Hex Codes | Mood / Vibe |
+| :--- | :--- | :--- |
+| **Petrol & Teal** *(Default)* | `#081721`, `#0E2C40`, `#148D8D`, `#C1E1A7`, `#EFBC75` | Deep midnight ocean with vibrant cyan teal and golden amber |
+| **Moon Phases** | `#161C22`, `#212A31`, `#4EA6C4`, `#748D92`, `#D3D9D4` | Cool celestial slate and titanium gray |
+| **Cyber Marine** | `#181A36`, `#25274D`, `#2E9CCA`, `#AAABB8` | Electric neon indigo and sky blue |
+| **Retro Artsy** | `#15161C`, `#D79922`, `#EFE2BA`, `#F13C20` | Editorial vintage warmth, ochre gold, and coral |
+| **Obsidian & Copper** | `#0E1013`, `#16191F`, `#E58A4E` | Warm glowing vacuum tubes, copper traces, and charcoal |
+| **Parchment Light** | `#FAF8F5`, `#FFFFFF`, `#127676` | Clean editorial light mode |
+
+### How Visitors Switch Palettes:
+In the sidebar footer, there is an interactive **swatch bar**. Visitors can click any color circle to transform the site theme in real-time. Their selection is automatically saved in `localStorage`.
+
+### How to Change the Default Theme:
+Open `js/main.js` and look for:
+```javascript
+applyTheme('petrol-teal'); // Change to 'moon-slate', 'cyber-marine', etc.
+```
+
+---
+
+## 📄 2. Resume Button & Replacing the PDF
+
+In the About hero section, a **Resume** button sits right after "Get in Touch":
+- It points directly to `assets/resume.pdf`.
+- When clicked, it opens the PDF in a new tab or prompts download.
+
+### How to Update or Replace Your Resume:
+1. When you have an updated resume PDF, simply name it `resume.pdf` and drop it into the `assets/` directory:
+   ```
+   assets/resume.pdf
+   ```
+2. If you prefer to host your resume on Google Drive, GitHub, or LinkedIn, open `content/about.md` and change:
+   ```yaml
+   resume_url: "https://your-custom-link.com/resume.pdf"
+   ```
+3. Run `python3 build.py`.
+
+---
+
+## 🌍 3. Photorealistic 3D Earth Globe
+
+At the bottom of the page in the telemetry dock, there is a **real-time 3D rotating Earth globe**:
+- Rendered on HTML5 Canvas via WebGL with satellite Earth mapping (`assets/earth_opt.jpg`).
+- Features a realistic day/night terminator (shadowed left side, illuminated right side) and atmospheric blue rim glow.
+- **Interactive**: Drag or swipe with your mouse/finger to spin the globe!
+- **Zero-Dependency**: Runs smoothly at 60 FPS directly on the GPU without any external 3D libraries.
+
+---
+
+## ✍️ 4. How to Edit Content & Projects
+
+All website text lives in the `content/` folder:
 
 ```
 content/
-├── about.md          # Bio, facts, headlines (with alternate choices)
-├── focus.md          # Key interests, hardware domains, and toolkit
+├── about.md          # Bio, resume link, facts, headlines (with alternate choices)
+├── focus.md          # Key interests (Raspberry Pi, Arduino, ESP32, Verilog, Linux, etc.)
 ├── experience.md     # Engineering timeline (currently commented out)
 ├── projects.md       # Projects list, GitHub links, category filter chips
 ├── writing.md        # Blog articles linking to your Jekyll/Chirpy blog
@@ -20,190 +73,43 @@ content/
 └── contact.md        # Email, GitHub, LinkedIn, RSS feed
 ```
 
-Whenever you edit any file inside `content/`, simply open your terminal and run:
-
+Whenever you make an edit, run:
 ```bash
 python3 build.py
 ```
+`build.py` runs in under 20 milliseconds and generates the production-ready `index.html`.
 
-`build.py` runs instantly (under 20 milliseconds) with **zero external dependencies** (no npm, no node, no gems required) and generates the static `index.html`.
-
----
-
-## 1. How to Add a New Project
-
-Open `content/projects.md`. Under the `projects:` list, copy and paste this block at the top or bottom of the list:
-
+### Adding a Project:
+Open `content/projects.md` and add a new block:
 ```yaml
   - title: "My New Hardware Project"
-    link: "https://github.com/samarthhgowdaa/my-new-project"
+    link: "https://github.com/samarthhgowdaa/my-project"
     category: "embedded"
     year: "2026"
-    description: "Brief summary of what the project does, the problem it solves, and how it was built."
+    description: "Brief summary of the circuit or firmware."
     tags:
       - "ESP32"
       - "FreeRTOS"
       - "C++"
 ```
 
-### Adding or Renaming Category Chips
-In `content/projects.md`, look at the `categories:` list:
+### Enabling the Experience Section:
+Open `content/experience.md`, set `enabled: true`, and run `python3 build.py`.
 
-```yaml
-categories:
-  - id: "all"
-    label: "All Projects"
-  - id: "systems"
-    label: "Systems & C/C++"
-  - id: "embedded"
-    label: "Hardware & Embedded"
-  - id: "digital"
-    label: "Digital Logic & HDL"
-  - id: "web"
-    label: "Web & Tools"
-```
+---
 
-To add a new category (e.g. `robotics`), simply add:
-```yaml
-  - id: "robotics"
-    label: "Robotics & Control"
-```
-And set `category: "robotics"` on any matching project!
+## 🚀 5. Testing & Deploying
 
-Then run:
+### Test Locally:
 ```bash
-python3 build.py
+python3 -m http.server 8000
+# Open http://localhost:8000 in your browser
 ```
 
----
-
-## 2. How to Change the Bold Headline & Location
-
-Open `content/about.md`.
-
-### Changing the Headline:
-Uncomment whichever choice you prefer (or write your own custom one):
-
-```yaml
-# Choice 1 (Active):
-headline: "Exploring machines from raw silicon up to software."
-
-# Choice 2:
-# headline: "To truly love a machine, one must open it, understand its heart, its design & its soul."
-
-# Choice 3:
-# headline: "Bridging digital circuits, low-level firmware, and creative software."
-
-# Choice 4:
-# headline: "Turning logic gates, microcontrollers, and code into tangible reality."
-```
-
-### Enabling Your Location:
-In `content/about.md`, uncomment the location line:
-```yaml
-location: "Bengaluru, India"
-```
-Then run:
+### Deploy to GitHub Pages:
 ```bash
-python3 build.py
+git add .
+git commit -m "Update portfolio"
+git push origin main
 ```
-
----
-
-## 3. How to Enable the Experience Tab
-
-Open `content/experience.md`. At the very top, change `enabled: false` to `enabled: true`:
-
-```yaml
-enabled: true
-```
-
-Then edit the company names, roles, bullets, and tags in `content/experience.md`, and run:
-
-```bash
-python3 build.py
-```
-
-The **02b Experience** tab will automatically appear in both your sticky sidebar navigation and the main page flow!
-
----
-
-## 4. How to Add Blog Posts / Writing Links
-
-Open `content/writing.md`. Under `posts:`, add your article:
-
-```yaml
-  - title: "Interfacing I2C Accelerometers on STM32"
-    date: "Oct 2026"
-    link: "https://samarthhgowdaa.github.io/posts/i2c-accelerometer/"
-    description: "Detailed walk-through of I2C registers, timing diagrams, and DMA buffer transfers."
-    tags:
-      - "STM32"
-      - "I2C"
-      - "Embedded C"
-```
-
-Then run `python3 build.py`.
-
----
-
-## 5. How to Add New Certifications & Photos
-
-1. Put your certificate image or badge in `assets/certs/` (e.g., `assets/certs/my_new_cert.png` or an SVG).
-2. Open `content/certifications.md` and add a new entry:
-
-```yaml
-  - title: "FPGA Design for Embedded Systems"
-    issuer: "Coursera / University of Colorado"
-    date: "2026"
-    link: "https://coursera.org/verify/YOUR_ID"
-    image: "assets/certs/my_new_cert.png"
-    credential_id: "CERT-FPGA-7712"
-    skills:
-      - "Verilog"
-      - "FPGA"
-      - "Timing Analysis"
-```
-
-Run `python3 build.py`.
-
----
-
-## 6. Testing Locally in Your Browser
-
-To preview your site on your local machine:
-
-1. Open a terminal in the `Portfolio/` directory.
-2. Start Python's built-in web server:
-   ```bash
-   python3 -m http.server 8000
-   ```
-3. Open your browser and navigate to:
-   ```
-   http://localhost:8000
-   ```
-
-*(You can also double-click `index.html` to open it directly in Firefox/Chrome/Brave!)*
-
----
-
-## 7. Deploying to GitHub Pages
-
-Since the site produces a completely standalone `index.html`, `css/`, and `js/`:
-
-1. Initialize Git (if not already done) and commit your files:
-   ```bash
-   git add .
-   git commit -m "Update portfolio site"
-   ```
-2. Push to your GitHub repository (`samarthhgowdaa.github.io` or `Portfolio`):
-   ```bash
-   git push origin main
-   ```
-3. In your GitHub repository settings:
-   - Go to **Settings** > **Pages**.
-   - Under **Build and deployment** > **Source**, select **Deploy from a branch**.
-   - Select Branch: `main`, folder: `/ (root)`.
-   - Click **Save**.
-
-Your site will be live within seconds!
+In your GitHub repo settings under **Pages**, set branch to `main` and root `/`. It will go live immediately!
