@@ -364,7 +364,7 @@ def build_site():
   <meta property="og:type" content="website">
   <meta property="og:title" content="Samarth Gowda — Electrical &amp; Electronics Engineer">
   <meta property="og:description" content="Exploring machines from raw silicon up to software. C/C++, Verilog, Embedded Systems &amp; Hardware.">
-  <meta property="og:url" content="https://samarthhgowdaa.github.io">
+  <meta property="og:url" content="https://samarthhgowdaa.github.io/Portfolio/">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
