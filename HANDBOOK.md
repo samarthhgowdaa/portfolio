@@ -4,30 +4,20 @@ Welcome to your portfolio handbook! This website is engineered to be **lightweig
 
 ---
 
-## 🌓 1. Theme & Pixel Art Electronics Backdrop
+## 🌓 1. Theme & Dot Grid Backdrop
 
-Your portfolio features the refined styling and palette of [v2.elejeune.me](https://v2.elejeune.me/) paired with an animated retro pixel-art electronics backdrop:
+Your portfolio features the refined styling and palette of [v2.elejeune.me](https://v2.elejeune.me/) paired with a minimal, clean **engineering dot grid backdrop**:
 
 - **Dark Mode (Default: Ink & Iris)**: Deep obsidian background (`#0d0e12`), raised cards (`#15171d`), subtle border lines (`#252833`), clean text (`#e4e6ec`), and Iris periwinkle accent (`#8b95f0`).
 - **Light Mode (Bone & Rust)**: Warm parchment background (`#f5f3ee`), pure white cards (`#ffffff`), warm borders (`#dbd6cb`), dark text (`#1b1a17`), and terracotta rust accent (`#b0472b`).
 - **Typography**: `Space Grotesk` for titles and body text, with monospace for metadata and code.
 
-### 🕹️ Pixel-Art Electronic Components Engine:
-- Floating in the background are 10 pixel-art electronic component sprites:
-  1. **DIP Microcontroller / IC** (dual pin rows, notch, pin 1 dot)
-  2. **Raspberry Pi / PCB Micro-Board** (SoC, GPIO header, USB jacks)
-  3. **Axial Resistor** (banded body with axial leads)
-  4. **Electrolytic Capacitor** (cylindrical can with negative stripe & unequal leads)
-  5. **Ceramic Disc Capacitor** ("104" disc marking & crimped leads)
-  6. **5mm Dome LED** (lens, internal die cup, cathode rim)
-  7. **TO-92 Transistor** (3 leads: E, B, C)
-  8. **HC-49 Crystal Oscillator** (16.000 MHz metal can)
-  9. **Digital Logic AND Gate** (dual inputs, curved body, output)
-  10. **Retro CRT Terminal Monitor** (phosphor screen with `>_` cursor prompt)
-- **Theme-Responsive**:
-  - In **Dark Theme**: components are drawn in crisp **white** on the dark background.
-  - In **Light Theme**: components are drawn in crisp **black** on the light background.
-- Motion is smooth and respects `prefers-reduced-motion`.
+### 📐 Engineering Dot Grid (`.bg-grid`):
+- A minimal millimeter-style dot grid pattern (`radial-gradient`) renders fixed across the viewport at 24px spacing.
+- **Theme-Adaptive**:
+  - In **Dark Theme**: subtle white dots (`rgba(255, 255, 255, 0.08)`) against the obsidian canvas.
+  - In **Light Theme**: subtle dark dots (`rgba(0, 0, 0, 0.07)`) against the parchment canvas.
+- **Pure CSS / 0% CPU**: Zero JavaScript computation, instant 120Hz smooth scrolling on mobile and desktop without battery drain.
 
 ### How It Works:
 - **System-Linked by Default**: When a visitor first arrives, the site automatically detects their OS/browser preference (`prefers-color-scheme`).
