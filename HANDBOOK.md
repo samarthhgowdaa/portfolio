@@ -98,11 +98,58 @@ Open `content/experience.md`, set `enabled: true`, and run `python3 build.py`.
 
 ---
 
-## 🚀 5. Testing & Deploying
+---
+
+## 💻 5. Cyberdeck CLI Terminal (SG-CLI)
+
+Your website includes a full retro-futuristic dropdown terminal emulator modeled after an embedded engineering console.
+
+### Opening & Closing the Terminal:
+- Click the **`CLI [~]`** button on the top HUD bar, or
+- Press the **`` ` `` / `~` (tilde)** key anywhere on the page, or
+- Press **`Escape`** or click **`ESC [x]`** to close.
+
+### Available Commands:
+| Command | What It Does |
+| :--- | :--- |
+| `neofetch` | Prints authentic hardware & engineering workstation specifications with ASCII chip art |
+| `projects` / `projects 1-6` | Lists modules or inspects detailed architecture specs for projects |
+| `skills` | Summarizes L0 to L4 silicon and software stack |
+| `bio` | Displays engineer background and philosophy |
+| `resume` | Transmits / opens `assets/resume.pdf` |
+| `theme <name>` | Switches palette on the fly (`petrol`, `moon`, `marine`, `retro`, `obsidian`, `light`) |
+| `whoami`, `date`, `uptime` | System diagnostics |
+| `clear` | Clears terminal screen |
+| `exit` | Closes the terminal modal |
+
+---
+
+## 🔊 6. Web Audio Synthesizer (SFX)
+
+The top HUD bar includes a **`SFX: OFF / ON`** button:
+- **Zero Audio Files**: All sounds are synthesized in real-time using native Web Audio API oscillators (sine and triangle waves).
+- **Muted by Default**: Respects user preference; never plays audio unexpectedly.
+- **Persistent**: Remembers toggle state in `localStorage`.
+- Produces subtle mechanical click chirps on button clicks, tactile keystroke ticks in the CLI terminal, and an aerospace chime on terminal boot.
+
+---
+
+## 🔬 7. Microprocessor Schematic & Silicon Stack
+
+- **Interactive Pinout HUD (About Section)**: Hover over any of the 20 SOIC pins on the `SG-328P` IC diagram to inspect active signals (UART RX/TX, SPI MOSI/MISO/SCK/CS, I2C SDA/SCL, ADC, PWM, CAN bus).
+- **Silicon Architecture Stack (Focus Section)**: Click through the 5 architectural layers (L0 Silicon & HDL, L1 Embedded & Edge, L2 Systems & C/C++, L3 Software & Tools, L4 Creative & Media) to showcase your complete spectrum from hardware registers to creative storytelling.
+
+---
+
+## 🚀 8. Testing & Deploying
 
 ### Test Locally:
 ```bash
 python3 -m http.server 8000
+# or
+bun run dev
+# or
+npm run dev
 # Open http://localhost:8000 in your browser
 ```
 

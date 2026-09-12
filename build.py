@@ -164,6 +164,185 @@ def inline_format(text):
     return text
 
 
+def generate_chip_schematic():
+    left_pins = [
+        ("PIN 01", "RESET (Active Low / Hardware Reset / DTR Flash)", "RST"),
+        ("PIN 02", "USART0_RXD (Serial Telemetry Receive Bus)", "RXD"),
+        ("PIN 03", "USART0_TXD (Serial Telemetry Transmit Bus)", "TXD"),
+        ("PIN 04", "INT0 / GPIO 2 (External Fast Hardware Edge Interrupt)", "INT0"),
+        ("PIN 05", "OC0A / PWM (Timer 0 High-Frequency 8-Bit PWM Out)", "PWM0"),
+        ("PIN 06", "OC0B / PWM (Complementary Inverter Drive PWM)", "PWM1"),
+        ("PIN 07", "VCC (+3.3V DC Primary Regulated System Rail)", "VCC"),
+        ("PIN 08", "GND (System Ground Reference Plane 0V)", "GND"),
+        ("PIN 09", "XTAL1 (16.000 MHz Low-Jitter Crystal Osc In)", "XTAL1"),
+        ("PIN 10", "XTAL2 (16.000 MHz Crystal Resonator Feedback Out)", "XTAL2"),
+    ]
+    right_pins = [
+        ("PIN 11", "SPI_MOSI (Master Out Slave In High-Speed Bus)", "MOSI"),
+        ("PIN 12", "SPI_MISO (Master In Slave Out Telemetry Bus)", "MISO"),
+        ("PIN 13", "SPI_SCK (Synchronous Peripheral Serial Clock)", "SCK"),
+        ("PIN 14", "SPI_SS / CS (Chip Select Active Low Enable)", "CS"),
+        ("PIN 15", "I2C_SDA (Two-Wire Sensor Bus Serial Data)", "SDA"),
+        ("PIN 16", "I2C_SCL (Two-Wire Sensor Bus 400kHz Fast Clock)", "SCL"),
+        ("PIN 17", "ADC0 / A0 (10-Bit SAR Analog Voltage Telemetry)", "ADC0"),
+        ("PIN 18", "ADC1 / BMS (Li-ion Battery Cell Voltage Telemetry)", "ADC1"),
+        ("PIN 19", "CAN_H (ISO 11898 Automotive Differential Bus High)", "CAN_H"),
+        ("PIN 20", "CAN_L (ISO 11898 Automotive Differential Bus Low)", "CAN_L"),
+    ]
+
+    left_svg = []
+    y_start = 55
+    y_gap = 27
+    for i, (name, func, label) in enumerate(left_pins):
+        y = y_start + i * y_gap
+        left_svg.append(
+            f'            <line class="chip-pin" x1="140" y1="{y}" x2="220" y2="{y}" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" data-pin-name="{name}" data-pin-func="{func}"/>\n'
+            f'            <rect class="chip-pin" x="126" y="{y-5}" width="14" height="10" rx="2" fill="var(--line)" data-pin-name="{name}" data-pin-func="{func}"/>\n'
+            f'            <text x="115" y="{y+3}" text-anchor="end" fill="var(--fg-dim)" font-family="var(--font-mono)" font-size="10">{label}</text>\n'
+        )
+
+    right_svg = []
+    for i, (name, func, label) in enumerate(right_pins):
+        y = y_start + i * y_gap
+        right_svg.append(
+            f'            <line class="chip-pin" x1="500" y1="{y}" x2="580" y2="{y}" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" data-pin-name="{name}" data-pin-func="{func}"/>\n'
+            f'            <rect class="chip-pin" x="580" y="{y-5}" width="14" height="10" rx="2" fill="var(--line)" data-pin-name="{name}" data-pin-func="{func}"/>\n'
+            f'            <text x="605" y="{y+3}" text-anchor="start" fill="var(--fg-dim)" font-family="var(--font-mono)" font-size="10">{label}</text>\n'
+        )
+
+    left_str = "".join(left_svg)
+    right_str = "".join(right_svg)
+
+    return f"""      <div class="chip-container" aria-label="Interactive Microprocessor Package Pinout">
+        <div class="chip-header">
+          <span>◈ MICROPROCESSOR SCHEMATIC // SG-328P SOIC-20</span>
+          <span>STATUS: CLK_RUNNING [HOVER PINS TO INSPECT BUS]</span>
+        </div>
+        <div class="chip-diagram">
+          <div id="pin-tooltip" role="tooltip" aria-hidden="true"></div>
+          <svg viewBox="0 0 720 360" role="img" aria-label="SG-328P Silicon Package Diagram">
+            <!-- Chip Outer Body -->
+            <rect x="220" y="32" width="280" height="295" rx="8" fill="var(--bg-soft)" stroke="var(--line)" stroke-width="2"/>
+            <!-- Index Notch & Pin 1 Indicator -->
+            <circle cx="245" cy="55" r="4.5" fill="var(--accent)"/>
+            <path d="M 345 32 A 15 15 0 0 0 375 32" fill="none" stroke="var(--line)" stroke-width="2"/>
+            <!-- Chip Markings -->
+            <text x="360" y="80" text-anchor="middle" fill="var(--fg)" font-family="var(--font-display)" font-size="16" font-weight="800" letter-spacing="0.08em">SG-328P // SOC</text>
+            <text x="360" y="103" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="10" letter-spacing="0.12em">VLSI CORE ARCHITECTURE</text>
+            <text x="360" y="122" text-anchor="middle" fill="var(--fg-faint)" font-family="var(--font-mono)" font-size="9.5">IIIT BANGALORE • B.E. EEE</text>
+            <!-- Silicon Die Window -->
+            <rect x="280" y="142" width="160" height="74" rx="4" fill="rgba(20, 141, 141, 0.08)" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <text x="360" y="172" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="11" font-weight="700">CORE SILICON DIE</text>
+            <text x="360" y="190" text-anchor="middle" fill="var(--accent-warm)" font-family="var(--font-mono)" font-size="9.5">RISC-V / SYSTEMVERILOG</text>
+            <text x="360" y="206" text-anchor="middle" fill="var(--fg-faint)" font-family="var(--font-mono)" font-size="9">32-BIT RTOS ARCH</text>
+            <!-- Bottom Specs -->
+            <text x="360" y="270" text-anchor="middle" fill="var(--fg-faint)" font-family="var(--font-mono)" font-size="9">FAB: TSMC-STYLE RTL • 50 MHz</text>
+            <text x="360" y="288" text-anchor="middle" fill="var(--fg-dim)" font-family="var(--font-mono)" font-size="9.5" font-weight="600">NEXUS CORE // SG-OS v3.4</text>
+            <!-- Left Pins -->
+{left_str}            <!-- Right Pins -->
+{right_str}          </svg>
+        </div>
+      </div>"""
+
+
+def generate_stack_explorer():
+    return """      <!-- Interactive Silicon & Systems Stack Explorer -->
+      <div class="stack-explorer" role="region" aria-label="Silicon &amp; Systems Architecture Explorer">
+        <div class="stack-nav" role="tablist" aria-orientation="vertical">
+          <button class="stack-tab-btn is-active" data-stack-layer="l0" role="tab" aria-selected="true" id="tab-l0" aria-controls="layer-l0">
+            <span>L0: Silicon &amp; HDL</span>
+            <small>0.0</small>
+          </button>
+          <button class="stack-tab-btn" data-stack-layer="l1" role="tab" aria-selected="false" id="tab-l1" aria-controls="layer-l1">
+            <span>L1: Embedded &amp; Edge</span>
+            <small>1.0</small>
+          </button>
+          <button class="stack-tab-btn" data-stack-layer="l2" role="tab" aria-selected="false" id="tab-l2" aria-controls="layer-l2">
+            <span>L2: Systems &amp; C/C++</span>
+            <small>2.0</small>
+          </button>
+          <button class="stack-tab-btn" data-stack-layer="l3" role="tab" aria-selected="false" id="tab-l3" aria-controls="layer-l3">
+            <span>L3: Software &amp; Tools</span>
+            <small>3.0</small>
+          </button>
+          <button class="stack-tab-btn" data-stack-layer="l4" role="tab" aria-selected="false" id="tab-l4" aria-controls="layer-l4">
+            <span>L4: Creative &amp; Media</span>
+            <small>4.0</small>
+          </button>
+        </div>
+
+        <div class="stack-content">
+          <div class="stack-panel is-active" id="layer-l0" role="tabpanel" aria-labelledby="tab-l0">
+            <h3>◈ Level 0: Silicon, Verilog HDL &amp; Digital Synthesis</h3>
+            <p>RTL modeling, digital logic gate design, finite state machines, and FPGA synthesis. Designing at the register-transfer level where clock domains, propagation delay, and silicon area define compute performance.</p>
+            <div class="stack-pill-box">
+              <span>Verilog HDL</span>
+              <span>SystemVerilog</span>
+              <span>Digital Logic Synthesis</span>
+              <span>FPGA Architecture</span>
+              <span>ALUs &amp; State Machines</span>
+              <span>KiCAD EDA</span>
+              <span>Power Electronics</span>
+            </div>
+          </div>
+
+          <div class="stack-panel" id="layer-l1" role="tabpanel" aria-labelledby="tab-l1" hidden>
+            <h3>◈ Level 1: Embedded Microcontrollers &amp; Edge Firmware</h3>
+            <p>Flashing bare-metal microcontrollers, interrupt handling, register configuration, and peripheral bus integration. Bridging physical analog signals with real-time digital control loops.</p>
+            <div class="stack-pill-box">
+              <span>ESP32 &amp; ESP-IDF</span>
+              <span>STM32 ARM Cortex-M</span>
+              <span>Arduino C/C++</span>
+              <span>Raspberry Pi</span>
+              <span>FreeRTOS Multitasking</span>
+              <span>UART / SPI / I2C</span>
+              <span>PWM &amp; Motor Controllers</span>
+            </div>
+          </div>
+
+          <div class="stack-panel" id="layer-l2" role="tabpanel" aria-labelledby="tab-l2" hidden>
+            <h3>◈ Level 2: Low-Level Systems, Memory &amp; POSIX</h3>
+            <p>Direct memory management, pointers, custom algorithmic data structures, and POSIX systems programming. Deep appreciation for how compiled binaries execute on real machine architectures.</p>
+            <div class="stack-pill-box">
+              <span>C (C99 / C11)</span>
+              <span>Modern C++ (C++17 / C++20)</span>
+              <span>Memory Allocation &amp; Heaps</span>
+              <span>Linux CLI &amp; Bash</span>
+              <span>GCC / Clang / Make</span>
+              <span>Fedora KDE Plasma</span>
+              <span>Git Version Control</span>
+            </div>
+          </div>
+
+          <div class="stack-panel" id="layer-l3" role="tabpanel" aria-labelledby="tab-l3" hidden>
+            <h3>◈ Level 3: Software Engineering &amp; Scientific Modeling</h3>
+            <p>Scientific computing, mathematical models in MATLAB/Simulink, high-level automation, and clean web engineering without bloated dependencies.</p>
+            <div class="stack-pill-box">
+              <span>Python 3</span>
+              <span>MATLAB &amp; Simulink</span>
+              <span>Semantic HTML5 / Modern CSS</span>
+              <span>WebGL 3D Shaders</span>
+              <span>Web Audio API</span>
+              <span>Jekyll / Static Site Generators</span>
+            </div>
+          </div>
+
+          <div class="stack-panel" id="layer-l4" role="tabpanel" aria-labelledby="tab-l4" hidden>
+            <h3>◈ Level 4: Creative Direction &amp; Digital Production</h3>
+            <p>Visual storytelling, cinematic video editing, motion color grading, and technical communication. Bringing engineering projects to life through compelling media narratives.</p>
+            <div class="stack-pill-box">
+              <span>DaVinci Resolve Studio</span>
+              <span>Video Editing &amp; Pacing</span>
+              <span>Color Grading &amp; LUTs</span>
+              <span>Blender 3D Modeling</span>
+              <span>Technical Documentation</span>
+              <span>Visual Arts &amp; UI Design</span>
+            </div>
+          </div>
+        </div>
+      </div>"""
+
+
 def build_site():
     print("Compiling portfolio from content/...")
 
@@ -186,6 +365,10 @@ def build_site():
     # Resume button
     resume_url = about_meta.get("resume_url", "assets/resume.pdf")
     resume_btn_text = about_meta.get("resume_button_text", "Resume")
+
+    # Chip Schematic & Stack Explorer
+    chip_html = generate_chip_schematic()
+    stack_explorer_html = generate_stack_explorer()
 
     # Facts HTML
     facts_html = ""
@@ -390,6 +573,40 @@ def build_site():
   <!-- Ambient hardware trace & pixel canvas backdrop -->
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
+  <!-- Top Cyberdeck HUD Bar -->
+  <header class="hud-bar" role="banner">
+    <div class="hud-left">
+      <span class="sys-id">SG-OS // NEXUS v3.4</span>
+      <div class="sys-telemetry">
+        <span class="pulse" style="width: 6px; height: 6px;" aria-hidden="true"></span>
+        <span id="hud-clock">00:00:00 UTC</span>
+        <span class="hud-sep" style="color: var(--line);">|</span>
+        <span>SYS_STAT: NOMINAL</span>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <button class="hud-btn" id="sfx-toggle" aria-pressed="false" title="Toggle audio feedback synthesizer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        <span class="sfx-state">SFX: OFF</span>
+      </button>
+
+      <button class="hud-btn" data-toggle-terminal title="Open interactive cyberdeck CLI terminal (Press `~`)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        <span>CLI [~]</span>
+      </button>
+
+      <div class="palette-swatches" title="Select color palette">
+        <button class="swatch-btn swatch-petrol is-active" data-theme-choice="petrol-teal" title="Petrol &amp; Teal (Uploaded)" aria-label="Petrol and Teal theme"></button>
+        <button class="swatch-btn swatch-moon" data-theme-choice="moon-slate" title="Moon Phases (Uploaded)" aria-label="Moon Phases theme"></button>
+        <button class="swatch-btn swatch-marine" data-theme-choice="cyber-marine" title="Cyber Marine (Uploaded)" aria-label="Cyber Marine theme"></button>
+        <button class="swatch-btn swatch-retro" data-theme-choice="retro-artsy" title="Retro Artsy (Uploaded)" aria-label="Retro Artsy theme"></button>
+        <button class="swatch-btn swatch-obsidian" data-theme-choice="obsidian-copper" title="Obsidian &amp; Copper" aria-label="Obsidian and Copper theme"></button>
+        <button class="swatch-btn swatch-light" data-theme-choice="parchment-light" title="Parchment Light" aria-label="Light mode"></button>
+      </div>
+    </div>
+  </header>
+
   <div class="shell">
 
     <!-- ───────────────────────── SIDEBAR ───────────────────────── -->
@@ -487,6 +704,8 @@ def build_site():
 {md_to_html(about_body)}
         </div>
 
+{chip_html}
+
         <ul class="facts">
 {facts_html}        </ul>
 
@@ -507,6 +726,8 @@ def build_site():
 
         <div class="domains-grid">
 {focus_domains_html}        </div>
+
+{stack_explorer_html}
 
         <div style="margin-top: 1.8rem; color: var(--fg-dim); font-size: .95rem;">
 {md_to_html(focus_body)}
@@ -604,7 +825,24 @@ def build_site():
     </main>
   </div>
 
+  <!-- Interactive Cyberdeck Terminal Modal (SG-CLI) -->
+  <div id="terminal-modal" class="terminal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Cyberdeck Terminal Console">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <span>SG-CLI // EMBEDDED KERNEL PROMPT [v3.4.1]</span>
+        <button id="terminal-close" class="terminal-close" aria-label="Close terminal">ESC [x]</button>
+      </div>
+      <div id="terminal-output" class="terminal-body" role="log" aria-live="polite"></div>
+      <div class="terminal-input-row">
+        <label for="terminal-input" class="term-prompt">samarth@sg-os:~$</label>
+        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="type 'help' or 'neofetch'...">
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
+  <script src="js/sfx.js"></script>
+  <script src="js/terminal.js"></script>
   <script src="js/main.js"></script>
   <script src="js/globe.js"></script>
 </body>
