@@ -1,7 +1,6 @@
 /**
  * Samarth Gowda — Portfolio Main Logic
- * Theme Switcher (v2.elejeune.me style), ultra-smooth momentum scroll engine,
- * IntersectionObserver scrollspy, and project category filters.
+ * Theme Switcher (v2.elejeune.me style), native scrollspy, and project filters.
  */
 (function () {
   'use strict';
@@ -79,201 +78,59 @@
       navToggle.setAttribute('aria-expanded', String(open));
     });
 
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a[data-nav]')) closeNav();
+    });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeNav();
     });
   }
 
   // ============================================================
-  // 3. Ultra-Smooth Momentum Scrolling Engine (Velvet Glide)
-  // ============================================================
-  var isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var currentY = window.scrollY;
-  var targetY  = window.scrollY;
-  var isRunning = false;
-
-  // Silky dampening factor: tuned for an effortless, buttery float
-  var ease = 0.068;
-
-  function getMaxScroll() {
-    return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  }
-
-  function lerpLoop() {
-    var diff = targetY - currentY;
-    if (Math.abs(diff) < 0.25) {
-      currentY = targetY;
-      window.scrollTo(0, Math.round(currentY));
-      isRunning = false;
-      return;
-    }
-
-    currentY += diff * ease;
-    window.scrollTo(0, currentY);
-    requestAnimationFrame(lerpLoop);
-  }
-
-  function smoothScrollTo(y) {
-    if (isReducedMotion) {
-      window.scrollTo(0, y);
-      return;
-    }
-    var maxScroll = getMaxScroll();
-    targetY = Math.max(0, Math.min(maxScroll, y));
-    if (!isRunning) {
-      currentY = window.scrollY;
-      isRunning = true;
-      requestAnimationFrame(lerpLoop);
-    }
-  }
-
-  if (!isReducedMotion) {
-    // Wheel Listener: Intercepts desktop wheel impulses and transforms them into liquid momentum
-    window.addEventListener('wheel', function (e) {
-      // Allow pinch-to-zoom (ctrlKey) and horizontal swipes
-      if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-
-      e.preventDefault();
-
-      var delta = e.deltaY;
-      if (e.deltaMode === 1) {
-        // Line mode (Firefox / Windows wheel ticks)
-        delta *= 38;
-      } else if (e.deltaMode === 2) {
-        // Page mode
-        delta *= window.innerHeight;
-      }
-
-      // Buoyant multiplier gives generous travel with zero heavy drag
-      delta *= 1.15;
-
-      var maxScroll = getMaxScroll();
-
-      if (!isRunning) {
-        currentY = window.scrollY;
-        targetY  = window.scrollY;
-      }
-
-      targetY = Math.max(0, Math.min(maxScroll, targetY + delta));
-
-      if (!isRunning) {
-        isRunning = true;
-        requestAnimationFrame(lerpLoop);
-      }
-    }, { passive: false });
-
-    // Keyboard Smooth Navigation (Arrow keys, Space, PageUp/Down, Home/End)
-    window.addEventListener('keydown', function (e) {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
-
-      var maxScroll = getMaxScroll();
-      var handled = false;
-
-      if (e.key === 'ArrowDown') {
-        smoothScrollTo(targetY + 120);
-        handled = true;
-      } else if (e.key === 'ArrowUp') {
-        smoothScrollTo(targetY - 120);
-        handled = true;
-      } else if (e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
-        smoothScrollTo(targetY + window.innerHeight * 0.82);
-        handled = true;
-      } else if (e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
-        smoothScrollTo(targetY - window.innerHeight * 0.82);
-        handled = true;
-      } else if (e.key === 'Home') {
-        smoothScrollTo(0);
-        handled = true;
-      } else if (e.key === 'End') {
-        smoothScrollTo(maxScroll);
-        handled = true;
-      }
-
-      if (handled) e.preventDefault();
-    });
-
-    // Synchronize immediately if user manually drags the scrollbar
-    window.addEventListener('scroll', function () {
-      if (!isRunning) {
-        currentY = targetY = window.scrollY;
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', function () {
-      currentY = targetY = window.scrollY;
-    });
-  }
-
-  // ============================================================
-  // 4. Smooth Anchor Navigation & IntersectionObserver Scrollspy
+  // 3. Scrollspy (Active Section Navigation Tracker)
   // ============================================================
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('a[data-nav]'));
   var sections = navLinks
     .map(function (a) { return document.querySelector(a.getAttribute('href')); })
     .filter(Boolean);
 
-  // Smooth scroll handler for all internal anchor links (Sidebar, Brand, Skip link, etc.)
-  document.addEventListener('click', function (e) {
-    var anchor = e.target.closest('a[href^="#"]');
-    if (!anchor) return;
-    var targetId = anchor.getAttribute('href');
-    if (!targetId || targetId === '#') return;
-    var targetEl = document.querySelector(targetId);
-    if (!targetEl) return;
+  if (sections.length) {
+    var ticking = false;
 
-    e.preventDefault();
-    closeNav();
+    function syncScrollspy() {
+      ticking = false;
+      var triggerLine = window.innerHeight * 0.32;
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+      var activeSection = atBottom ? sections[sections.length - 1] : sections[0];
 
-    var isMobile = window.innerWidth <= 900;
-    var headerOffset = isMobile ? 80 : 36;
-    var targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerOffset;
-
-    smoothScrollTo(targetPos);
-
-    if (history.pushState) {
-      history.pushState(null, '', targetId);
-    }
-  });
-
-  // Zero-reflow IntersectionObserver scrollspy
-  if (sections.length && 'IntersectionObserver' in window) {
-    var activeId = sections[0].id;
-
-    function updateActiveNav(id) {
-      if (!id || id === activeId) return;
-      activeId = id;
-      navLinks.forEach(function (link) {
-        link.classList.toggle('is-current', link.getAttribute('href') === '#' + id);
-      });
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          updateActiveNav(entry.target.id);
+      if (!atBottom) {
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].getBoundingClientRect().top <= triggerLine) {
+            activeSection = sections[i];
+          }
         }
-      });
-    }, {
-      root: null,
-      rootMargin: '-18% 0px -70% 0px',
-      threshold: 0
-    });
-
-    sections.forEach(function (sec) { observer.observe(sec); });
-
-    // Edge check: Top of page and bottom of page
-    window.addEventListener('scroll', function () {
-      if (window.scrollY < 40) {
-        updateActiveNav(sections[0].id);
-      } else if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 16) {
-        updateActiveNav(sections[sections.length - 1].id);
       }
-    }, { passive: true });
+
+      navLinks.forEach(function (link) {
+        var isCurrent = link.getAttribute('href') === '#' + activeSection.id;
+        link.classList.toggle('is-current', isCurrent);
+      });
+    }
+
+    function requestScrollspy() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(syncScrollspy);
+    }
+
+    window.addEventListener('scroll', requestScrollspy, { passive: true });
+    window.addEventListener('resize', requestScrollspy);
+    syncScrollspy();
   }
 
   // ============================================================
-  // 5. Project Category Filters
+  // 4. Project Category Filters
   // ============================================================
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('#project-grid .card'));

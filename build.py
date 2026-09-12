@@ -367,8 +367,9 @@ def build_site():
   <meta property="og:url" content="https://samarthhgowdaa.github.io">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/Aptos.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="assets/fonts/Aptos_Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
@@ -391,10 +392,8 @@ def build_site():
 <body>
   <a class="skip-link" href="#about">Skip to content</a>
 
-  <!-- Ambient engineering dot grid & glassmorphism light auras -->
+  <!-- Ambient engineering dot grid backdrop -->
   <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
 
   <div class="shell">
 
