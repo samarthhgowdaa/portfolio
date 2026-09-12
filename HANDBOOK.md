@@ -8,16 +8,17 @@ Welcome to your portfolio handbook! This website is engineered to be **lightweig
 
 Your portfolio features the refined styling and palette of [v2.elejeune.me](https://v2.elejeune.me/) paired with a minimal, clean **engineering dot grid backdrop**:
 
-- **Dark Mode (Default: Ink & Iris)**: Deep obsidian background (`#0d0e12`), raised cards (`#15171d`), subtle border lines (`#252833`), clean text (`#e4e6ec`), and Iris periwinkle accent (`#8b95f0`).
-- **Light Mode (Bone & Rust)**: Warm parchment background (`#f5f3ee`), pure white cards (`#ffffff`), warm borders (`#dbd6cb`), dark text (`#1b1a17`), and terracotta rust accent (`#b0472b`).
-- **Typography**: `Space Grotesk` for titles and body text, with monospace for metadata and code.
+- **Dark Mode (Default: Ink & Iris)**: Deep obsidian background (`#0d0e12`), frosted glass cards (`#15171d`), subtle border lines (`#252833`), clean text (`#e4e6ec`), and Iris periwinkle accent (`#8b95f0`).
+- **Light Mode (Bone & Rust)**: Warm parchment background (`#f5f3ee`), pure milk-glass cards (`#ffffff`), warm borders (`#dbd6cb`), dark text (`#1b1a17`), and terracotta rust accent (`#b0472b`).
+- **Typography**: Complete **Aptos Font Family** self-hosted in `assets/fonts/`:
+  - `Aptos Display` (weights 700, 800, 900) for impactful bold headlines and brand lettering.
+  - `Aptos` (weights 400, 700, 800) for body reading experience and crisp paragraph flow.
+  - `Aptos Mono` for technical specs, timelines, dates, and code tags.
 
-### 📐 Engineering Dot Grid (`.bg-grid`):
+### 📐 Engineering Dot Grid & Ambient Light Orbs:
 - A minimal millimeter-style dot grid pattern (`radial-gradient`) renders fixed across the viewport at 24px spacing.
-- **Theme-Adaptive**:
-  - In **Dark Theme**: subtle white dots (`rgba(255, 255, 255, 0.08)`) against the obsidian canvas.
-  - In **Light Theme**: subtle dark dots (`rgba(0, 0, 0, 0.07)`) against the parchment canvas.
-- **Pure CSS / 0% CPU**: Zero JavaScript computation, instant 120Hz smooth scrolling on mobile and desktop without battery drain.
+- **Ambient Chromatic Glow Orbs (`.bg-glow-1`, `.bg-glow-2`)**: Soft, diffused radial gradient light orbs sit behind the dot grid. When frosted glass cards scroll across them, they refract subtle, warm/iris backlighting through the frosted glass.
+- **Pure CSS / 0% CPU**: Zero JavaScript computation during normal rendering, instant 120Hz scrolling on mobile and desktop without battery drain.
 
 ### How It Works:
 - **System-Linked by Default**: When a visitor first arrives, the site automatically detects their OS/browser preference (`prefers-color-scheme`).
@@ -45,19 +46,20 @@ In the About hero section, a **Resume** button sits right after "Get in Touch":
 
 ---
 
-## 💎 3. Glassmorphic Design System & Multi-Device Optimization
+## 💎 3. Enhanced Glassmorphism & Silky Smooth Scroll Engine
 
-The website features an ultra-modern **Glassmorphic design system** engineered for crisp contrast and fluid rendering across all devices:
+The website features an elevated **Glassmorphic design system** engineered with high-refraction lighting and a frictionless navigation engine:
 
-- **Frosted Glass Components**:
-  - Cards, sidebar, filter chips, buttons, and badges utilize `backdrop-filter: blur(16px)` with subtle transparency and border highlights (`inset 0 1px 0 0 rgba(...)`).
-  - Dark mode blends obsidian glass (`rgba(21, 23, 29, 0.62)`) with Iris accents.
-  - Light mode blends crisp milk-glass (`rgba(255, 255, 255, 0.68)`) with Terracotta rust accents.
-- **Multi-Device Responsive Grid**:
-  - Cards dynamically resize using `minmax(min(100%, 280px), 1fr)`, preventing clipping on narrow 320px screens up to 4K displays.
-  - Full safe-area support (`env(safe-area-inset-*)`) for notched iPhones and gesture home bars.
-  - Touch-friendly minimum target sizes (>= 44px) and zero double-tap delay.
-  - Ultra-efficient: zero WebGL overhead and pure CSS backdrop blur.
+- **Elevated Frosted Glass System**:
+  - Cards, sidebar, filter chips, quote boxes, and buttons utilize `backdrop-filter: blur(20px) saturate(180%)`.
+  - Directional specular surface lighting: `linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%)`.
+  - Double inset specular edge bevels: `inset 0 1px 1px 0 rgba(255, 255, 255, 0.14)` for the crisp top light reflection, plus perimeter rim highlights.
+  - Ambient elevation shadows with accent hover glows (`box-shadow: 0 16px 44px ..., 0 0 24px var(--accent-glow)`).
+- **Silky Smooth Scrolling Engine**:
+  - **Zero-Reflow IntersectionObserver Scrollspy**: Automatically tracks and highlights the active section in the sidebar without locking the main thread with scroll calculations.
+  - **Smooth Internal Navigation**: Clicking any section anchor smoothly scrolls into view with automatic header height compensation on both desktop and mobile.
+  - **Desktop Mouse Wheel Momentum Lerp**: Gently dampens discrete notched mouse wheels into fluid, cinematic inertia via `requestAnimationFrame` while preserving native 120Hz trackpad physics and touchscreen gestures.
+  - **Reduced Motion Friendly**: Automatically detects and respects OS `prefers-reduced-motion: reduce`.
 
 ---
 

@@ -2,8 +2,65 @@
    Samarth Gowda — Portfolio Stylesheet
    Directly themed after v2.elejeune.me:
    "Ink & Iris" (Dark) / "Bone & Rust" (Light)
-   with Glassmorphic Design Language & Universal Device Optimization.
+   with Aptos Typography, Enhanced Glassmorphism & Buttery Smooth Scroll.
    ============================================================ */
+
+/* ---------- Aptos Font Family Definitions ---------- */
+@font-face {
+  font-family: 'Aptos';
+  src: local('Aptos'), url('../assets/fonts/Aptos.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos';
+  src: local('Aptos Italic'), url('../assets/fonts/Aptos_Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos';
+  src: local('Aptos Bold'), url('../assets/fonts/Aptos_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos';
+  src: local('Aptos ExtraBold'), url('../assets/fonts/Aptos_ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos Display';
+  src: local('Aptos Display Bold'), local('Aptos ExtraBold'), url('../assets/fonts/Aptos_ExtraBold.ttf') format('truetype');
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos Display';
+  src: local('Aptos Black'), url('../assets/fonts/Aptos_Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aptos Mono';
+  src: local('Aptos Mono Bold'), local('Aptos Mono'), url('../assets/fonts/Aptos_Mono_Bold.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ---------- 1. Dark Theme: Ink & Iris (Default) ---------- */
 :root,
@@ -22,24 +79,25 @@ html[data-theme="dark"] {
   --accent:        #8b95f0;
   --accent-hover:  #a1aaed;
   --accent-soft:   rgba(139, 149, 240, .10);
-  --accent-glow:   rgba(139, 149, 240, .28);
+  --accent-glow:   rgba(139, 149, 240, .32);
   --dot-color:     rgba(255, 255, 255, .08);
 
-  /* Glassmorphic Design Tokens (Dark Mode) */
-  --glass-bg:           rgba(21, 23, 29, 0.62);
-  --glass-bg-hover:     rgba(27, 30, 38, 0.85);
-  --glass-sidebar:      rgba(13, 14, 18, 0.78);
-  --glass-panel:        rgba(21, 23, 29, 0.90);
-  --glass-pill:         rgba(255, 255, 255, 0.05);
-  --glass-border:       rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(139, 149, 240, 0.45);
-  --glass-shadow:       0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
-  --glass-shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.52), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
-  --glass-blur:         blur(16px) saturate(160%);
+  /* Enhanced Glassmorphic Design Tokens (Dark Mode) */
+  --glass-bg:           rgba(21, 23, 29, 0.52);
+  --glass-bg-hover:     rgba(27, 30, 38, 0.78);
+  --glass-sidebar:      rgba(13, 14, 18, 0.72);
+  --glass-panel:        rgba(21, 23, 29, 0.88);
+  --glass-pill:         rgba(255, 255, 255, 0.06);
+  --glass-border:       rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(139, 149, 240, 0.55);
+  --glass-shadow:       0 10px 32px 0 rgba(0, 0, 0, 0.38), inset 0 1px 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --glass-shadow-hover: 0 16px 44px 0 rgba(0, 0, 0, 0.54), inset 0 1px 1px 0 rgba(255, 255, 255, 0.26), inset 0 0 0 1px rgba(139, 149, 240, 0.35);
+  --glass-blur:         blur(20px) saturate(180%);
 
-  --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
-  --font-display: var(--sans);
+  /* Typography Stacks: Aptos Family */
+  --sans:         'Aptos', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Aptos Display', 'Aptos', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:         'Aptos Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-body:    var(--sans);
   --font-mono:    var(--mono);
 
@@ -66,20 +124,20 @@ html[data-theme="light"] {
   --accent:      #b0472b;
   --accent-hover: #c45437;
   --accent-soft: rgba(176, 71, 43, .09);
-  --accent-glow: rgba(176, 71, 43, .22);
+  --accent-glow: rgba(176, 71, 43, .24);
   --dot-color:   rgba(0, 0, 0, .07);
 
-  /* Glassmorphic Design Tokens (Light Mode) */
-  --glass-bg:           rgba(255, 255, 255, 0.68);
-  --glass-bg-hover:     rgba(255, 255, 255, 0.92);
-  --glass-sidebar:      rgba(245, 243, 238, 0.82);
-  --glass-panel:        rgba(255, 255, 255, 0.94);
+  /* Enhanced Glassmorphic Design Tokens (Light Mode) */
+  --glass-bg:           rgba(255, 255, 255, 0.60);
+  --glass-bg-hover:     rgba(255, 255, 255, 0.88);
+  --glass-sidebar:      rgba(245, 243, 238, 0.75);
+  --glass-panel:        rgba(255, 255, 255, 0.92);
   --glass-pill:         rgba(0, 0, 0, 0.04);
-  --glass-border:       rgba(255, 255, 255, 0.85);
-  --glass-border-hover: rgba(176, 71, 43, 0.42);
-  --glass-shadow:       0 8px 28px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
-  --glass-shadow-hover: 0 14px 36px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 1);
-  --glass-blur:         blur(16px) saturate(160%);
+  --glass-border:       rgba(255, 255, 255, 0.90);
+  --glass-border-hover: rgba(176, 71, 43, 0.50);
+  --glass-shadow:       0 10px 30px 0 rgba(0, 0, 0, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 1), inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --glass-shadow-hover: 0 16px 38px 0 rgba(0, 0, 0, 0.10), inset 0 1px 1px 0 rgba(255, 255, 255, 1), inset 0 0 0 1px rgba(176, 71, 43, 0.35);
+  --glass-blur:         blur(20px) saturate(180%);
 }
 
 /* ---------- Reset & Universal Device Optimization ---------- */
@@ -126,11 +184,41 @@ body {
   background-size: 24px 24px;
 }
 
+/* Ambient Soft Glassmorphism Light Orbs */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  will-change: transform;
+}
+.bg-glow-1 {
+  top: -12vw;
+  right: -8vw;
+  width: 50vw;
+  height: 50vw;
+  max-width: 680px;
+  max-height: 680px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 68%);
+  opacity: 0.55;
+}
+.bg-glow-2 {
+  top: 45vh;
+  left: -12vw;
+  width: 45vw;
+  height: 45vw;
+  max-width: 580px;
+  max-height: 580px;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  opacity: 0.45;
+}
+
 h1, h2, h3, h4 {
-  font-family: var(--sans);
+  font-family: var(--font-display);
   line-height: 1.2;
   margin: 0;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -.025em;
   color: var(--fg);
 }
@@ -229,9 +317,10 @@ a:hover {
   line-height: 1.25;
 }
 .brand-text b {
-  font-family: var(--sans);
+  font-family: var(--font-display);
   font-size: 1.05rem;
   letter-spacing: -.02em;
+  font-weight: 800;
 }
 .brand-text small {
   color: var(--fg-faint);
@@ -452,7 +541,7 @@ a:hover {
   margin: 1.8rem 0;
   padding: 1.1rem 1.4rem;
   border-left: 3px solid var(--accent);
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -486,25 +575,27 @@ a:hover {
   border: 0;
 }
 .facts li {
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius);
-  padding: 1rem 1.25rem;
+  padding: 1.1rem 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: .25rem;
-  transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+  gap: .3rem;
+  transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
 }
 .facts li:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--glass-border-hover);
-  background: var(--glass-bg-hover);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.025) 100%), var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover), 0 0 16px var(--accent-glow);
 }
 .facts b {
-  font-family: var(--sans);
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: .95rem;
   color: var(--fg);
 }
@@ -585,23 +676,23 @@ a:hover {
 }
 
 .domain-card {
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius);
-  padding: 1.4rem;
+  padding: 1.45rem;
   display: flex;
   flex-direction: column;
   gap: .75rem;
-  transition: transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease), background .24s var(--ease);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
 }
 .domain-card:hover {
-  transform: translateY(-3px);
-  background: var(--glass-bg-hover);
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.025) 100%), var(--glass-bg-hover);
   border-color: var(--glass-border-hover);
-  box-shadow: var(--glass-shadow-hover), 0 0 20px var(--accent-glow);
+  box-shadow: var(--glass-shadow-hover), 0 0 24px var(--accent-glow);
 }
 
 .domain-card h3 {
@@ -769,8 +860,8 @@ a:hover {
 /* Glassmorphic Project Card */
 .card {
   position: relative;
-  padding: 1.4rem;
-  background: var(--glass-bg);
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
@@ -778,14 +869,14 @@ a:hover {
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
-  gap: .65rem;
-  transition: transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease), background .24s var(--ease);
+  gap: .7rem;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
 }
 .card:hover {
-  transform: translateY(-3px);
-  background: var(--glass-bg-hover);
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.025) 100%), var(--glass-bg-hover);
   border-color: var(--glass-border-hover);
-  box-shadow: var(--glass-shadow-hover), 0 0 24px var(--accent-glow);
+  box-shadow: var(--glass-shadow-hover), 0 0 28px var(--accent-glow);
 }
 .card[hidden] { display: none; }
 
@@ -912,7 +1003,7 @@ a:hover {
 
 .cert-card {
   position: relative;
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
@@ -921,13 +1012,13 @@ a:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease), background .24s var(--ease);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
 }
 .cert-card:hover {
-  transform: translateY(-3px);
-  background: var(--glass-bg-hover);
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.025) 100%), var(--glass-bg-hover);
   border-color: var(--glass-border-hover);
-  box-shadow: var(--glass-shadow-hover), 0 0 20px var(--accent-glow);
+  box-shadow: var(--glass-shadow-hover), 0 0 24px var(--accent-glow);
 }
 
 .cert-preview {
@@ -964,7 +1055,11 @@ a:hover {
   color: var(--fg-faint);
 }
 
-.cert-info h3 { font-size: 1rem; }
+.cert-info h3 {
+  font-size: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
 .cert-info h3 a { color: var(--fg); }
 .cert-card:hover .cert-info h3 a { color: var(--accent); }
 .cert-info h3 a::after {
@@ -990,19 +1085,21 @@ a:hover {
   display: grid;
   grid-template-columns: 8rem minmax(0, 1fr);
   gap: 1.2rem;
-  padding: .85rem 1.1rem;
+  padding: .95rem 1.25rem;
   border-radius: var(--radius-sm);
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 100%), var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--glass-shadow);
   align-items: baseline;
-  transition: border-color .2s var(--ease), background .2s var(--ease);
+  transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
 }
 .contact-item:hover {
+  transform: translateY(-2px);
   border-color: var(--glass-border-hover);
-  background: var(--glass-bg-hover);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%), var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover), 0 0 16px var(--accent-glow);
 }
 .contact-label {
   font-family: var(--mono);
@@ -1035,6 +1132,10 @@ a:hover {
 
 /* Tablets & Small Laptops (<= 900px) */
 @media (max-width: 900px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
   .shell {
     grid-template-columns: 1fr;
   }

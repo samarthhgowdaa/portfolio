@@ -1,7 +1,7 @@
 /**
  * Samarth Gowda — Portfolio Main Logic
- * Theme Switcher (v2.elejeune.me style), scrollspy, project filters,
- * and animated pixel-art electronic components canvas engine.
+ * Theme Switcher (v2.elejeune.me style), smooth anchor navigation,
+ * IntersectionObserver scrollspy, discrete wheel momentum lerp, and project filters.
  */
 (function () {
   'use strict';
@@ -89,49 +89,146 @@
   }
 
   // ============================================================
-  // 3. Scrollspy (Active Section Navigation Tracker)
+  // 3. Smooth Anchor Navigation & IntersectionObserver Scrollspy
   // ============================================================
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('a[data-nav]'));
   var sections = navLinks
     .map(function (a) { return document.querySelector(a.getAttribute('href')); })
     .filter(Boolean);
 
-  if (sections.length) {
-    var ticking = false;
+  // Smooth scroll handler for all internal anchor links
+  document.addEventListener('click', function (e) {
+    var anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+    var targetId = anchor.getAttribute('href');
+    if (!targetId || targetId === '#') return;
+    var targetEl = document.querySelector(targetId);
+    if (!targetEl) return;
 
-    function syncScrollspy() {
-      ticking = false;
-      var triggerLine = window.innerHeight * 0.32;
-      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
-      var activeSection = atBottom ? sections[sections.length - 1] : sections[0];
+    e.preventDefault();
+    closeNav();
 
-      if (!atBottom) {
-        for (var i = 0; i < sections.length; i++) {
-          if (sections[i].getBoundingClientRect().top <= triggerLine) {
-            activeSection = sections[i];
-          }
-        }
-      }
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+    if (history.pushState) {
+      history.pushState(null, '', targetId);
+    }
+  });
+
+  // Zero-reflow IntersectionObserver scrollspy
+  if (sections.length && 'IntersectionObserver' in window) {
+    var activeId = sections[0].id;
+
+    function updateActiveNav(id) {
+      if (!id || id === activeId) return;
+      activeId = id;
       navLinks.forEach(function (link) {
-        var isCurrent = link.getAttribute('href') === '#' + activeSection.id;
-        link.classList.toggle('is-current', isCurrent);
+        link.classList.toggle('is-current', link.getAttribute('href') === '#' + id);
       });
     }
 
-    function requestScrollspy() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(syncScrollspy);
-    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          updateActiveNav(entry.target.id);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '-18% 0px -70% 0px',
+      threshold: 0
+    });
 
-    window.addEventListener('scroll', requestScrollspy, { passive: true });
-    window.addEventListener('resize', requestScrollspy);
-    syncScrollspy();
+    sections.forEach(function (sec) { observer.observe(sec); });
+
+    // Edge check: Top of page and bottom of page
+    window.addEventListener('scroll', function () {
+      if (window.scrollY < 40) {
+        updateActiveNav(sections[0].id);
+      } else if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 16) {
+        updateActiveNav(sections[sections.length - 1].id);
+      }
+    }, { passive: true });
   }
 
   // ============================================================
-  // 4. Project Category Filters
+  // 4. Silky Smooth Momentum Scroll Engine (Desktop Wheel)
+  // ============================================================
+  (function initSmoothWheel() {
+    // Respect user motion preference & touch environments
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches) return;
+
+    var currentY = window.scrollY;
+    var targetY  = window.scrollY;
+    var isRunning = false;
+    var dampening = 0.10; // Ease factor
+
+    function getMaxScroll() {
+      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function lerpLoop() {
+      var diff = targetY - currentY;
+      if (Math.abs(diff) < 0.6) {
+        currentY = targetY;
+        window.scrollTo(0, currentY);
+        isRunning = false;
+        return;
+      }
+
+      currentY += diff * dampening;
+      window.scrollTo(0, currentY);
+      requestAnimationFrame(lerpLoop);
+    }
+
+    window.addEventListener('wheel', function (e) {
+      // Allow pinch-to-zoom and horizontal trackpad gestures
+      if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+      // Detect discrete mouse wheel notches (lines mode or integer steps >= 40px)
+      // Continuous precision trackpads emit small fractional pixel values
+      var isLineMode = e.deltaMode === 1;
+      var isDiscreteStep = (e.deltaMode === 0 && Math.abs(e.deltaY) >= 40 && Number.isInteger(e.deltaY));
+
+      if (!isLineMode && !isDiscreteStep) {
+        // Trackpad or precision device — let browser handle native 120Hz gesture physics
+        currentY = targetY = window.scrollY;
+        return;
+      }
+
+      e.preventDefault();
+
+      var delta = isLineMode ? e.deltaY * 34 : e.deltaY * 1.05;
+      var maxScroll = getMaxScroll();
+
+      if (!isRunning) {
+        currentY = window.scrollY;
+        targetY  = window.scrollY;
+      }
+
+      targetY = Math.max(0, Math.min(maxScroll, targetY + delta));
+
+      if (!isRunning) {
+        isRunning = true;
+        requestAnimationFrame(lerpLoop);
+      }
+    }, { passive: false });
+
+    // Sync state on user scrollbar drag or keyboard navigation
+    window.addEventListener('scroll', function () {
+      if (!isRunning) {
+        currentY = targetY = window.scrollY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+      currentY = targetY = window.scrollY;
+    });
+  })();
+
+  // ============================================================
+  // 5. Project Category Filters
   // ============================================================
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('#project-grid .card'));
@@ -157,4 +254,3 @@
     });
   }
 })();
-
