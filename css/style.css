@@ -146,8 +146,9 @@ html[data-theme="light"] {
 }
 
 html {
+  font-size: 105%; /* Universally scale all rem typography by +5% */
   scroll-behavior: smooth;
-  scroll-padding-top: clamp(2rem, 5vw, 4rem);
+  scroll-padding-top: clamp(2.1rem, 5.2vw, 4.2rem);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -157,8 +158,8 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--sans);
-  font-size: clamp(15px, 0.95rem + 0.15vw, 16.5px);
-  line-height: 1.65;
+  font-size: clamp(15.75px, 1rem + 0.15vw, 17.3px);
+  line-height: 1.68;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   position: relative;
@@ -463,9 +464,9 @@ a:hover {
 .section-title {
   display: flex;
   align-items: baseline;
-  gap: .8rem;
-  font-size: clamp(1.4rem, 3.2vw, 1.95rem);
-  margin-bottom: 1rem;
+  gap: .85rem;
+  font-size: clamp(1.47rem, 3.35vw, 2.05rem);
+  margin-bottom: 1.05rem;
 }
 .section-title i {
   font-style: normal;
@@ -526,10 +527,10 @@ a:hover {
 }
 
 .hero h1 {
-  font-size: clamp(2.1rem, 4.8vw, 3.3rem);
+  font-size: clamp(2.2rem, 5vw, 3.45rem);
   letter-spacing: -.032em;
   margin-bottom: 1.5rem;
-  max-width: 48rem;
+  max-width: 50rem;
   line-height: 1.16;
 }
 .hero h1 em {
