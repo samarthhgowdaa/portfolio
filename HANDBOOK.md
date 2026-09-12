@@ -45,13 +45,19 @@ In the About hero section, a **Resume** button sits right after "Get in Touch":
 
 ---
 
-## 🌍 3. Photorealistic 3D Earth Globe
+## 💎 3. Glassmorphic Design System & Multi-Device Optimization
 
-At the bottom of the page in the telemetry dock, there is a **real-time 3D rotating Earth globe**:
-- Rendered on HTML5 Canvas via WebGL with satellite Earth mapping (`assets/earth_opt.jpg`).
-- Features a realistic day/night terminator (shadowed left side, illuminated right side) and atmospheric blue rim glow.
-- **Interactive**: Drag or swipe with your mouse/finger to spin the globe!
-- **Zero-Dependency**: Runs smoothly at 60 FPS directly on the GPU without any external 3D libraries.
+The website features an ultra-modern **Glassmorphic design system** engineered for crisp contrast and fluid rendering across all devices:
+
+- **Frosted Glass Components**:
+  - Cards, sidebar, filter chips, buttons, and badges utilize `backdrop-filter: blur(16px)` with subtle transparency and border highlights (`inset 0 1px 0 0 rgba(...)`).
+  - Dark mode blends obsidian glass (`rgba(21, 23, 29, 0.62)`) with Iris accents.
+  - Light mode blends crisp milk-glass (`rgba(255, 255, 255, 0.68)`) with Terracotta rust accents.
+- **Multi-Device Responsive Grid**:
+  - Cards dynamically resize using `minmax(min(100%, 280px), 1fr)`, preventing clipping on narrow 320px screens up to 4K displays.
+  - Full safe-area support (`env(safe-area-inset-*)`) for notched iPhones and gesture home bars.
+  - Touch-friendly minimum target sizes (>= 44px) and zero double-tap delay.
+  - Ultra-efficient: zero WebGL overhead and pure CSS backdrop blur.
 
 ---
 
