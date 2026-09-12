@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Samarth Gowda — Electrical &amp; Electronics Engineer</title>
+  <meta name="description" content="Samarth Gowda — Electrical &amp; Electronics Engineer exploring machines from raw silicon up to firmware, low-level systems, and software.">
+  <meta name="author" content="Samarth Gowda">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0e1013">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Samarth Gowda — Electrical &amp; Electronics Engineer">
+  <meta property="og:description" content="Exploring machines from raw silicon up to software. C/C++, Verilog, Embedded Systems &amp; Hardware.">
+  <meta property="og:url" content="https://samarthhgowdaa.github.io">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    /* Prevent theme flash by detecting theme before first paint */
+    (function () {
+      try {
+        var saved = localStorage.getItem('sg_theme');
+        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#about">Skip to content</a>
+
+  <!-- Ambient hardware trace & pixel canvas backdrop -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="shell">
+
+    <!-- ───────────────────────── SIDEBAR ───────────────────────── -->
+    <header class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="#about">
+          <!-- Animated IC / Chip Circuit Vector Mark -->
+          <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label="Samarth Gowda Chip Mark">
+            <rect x="7" y="7" width="18" height="18" rx="3.5" fill="#16191f" stroke="var(--accent)" stroke-width="1.6"/>
+            <line x1="11" y1="3" x2="11" y2="7" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="16" y1="3" x2="16" y2="7" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="21" y1="3" x2="21" y2="7" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="11" y1="25" x2="11" y2="29" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="16" y1="25" x2="16" y2="29" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="21" y1="25" x2="21" y2="29" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3" y1="11" x2="7" y2="11" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3" y1="16" x2="7" y2="16" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3" y1="21" x2="7" y2="21" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="25" y1="11" x2="29" y2="11" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="25" y1="16" x2="29" y2="16" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="25" y1="21" x2="29" y2="21" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="12" y="12" width="8" height="8" rx="1.5" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="1.2"/>
+            <circle cx="16" cy="16" r="1.8" fill="var(--accent)"/>
+          </svg>
+          <span class="brand-text">
+            <b>Samarth Gowda</b>
+            <small>Electrical &amp; Electronics Engineer</small>
+          </span>
+        </a>
+
+        <!-- Mobile hamburger toggle -->
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Toggle navigation">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <nav class="nav" id="nav" aria-label="Sections">
+        <ul>
+          <li><a href="#about"          data-nav><i>01</i>About</a></li>
+          <li><a href="#focus"          data-nav><i>02</i>Focus</a></li>
+        <!-- Uncomment when ready: <li><a href="#experience" data-nav><i>02b</i>Experience</a></li> -->
+          <li><a href="#projects"       data-nav><i>03</i>Projects</a></li>
+          <li><a href="#writing"        data-nav><i>04</i>Writing</a></li>
+          <li><a href="#education"      data-nav><i>05</i>Education</a></li>
+          <li><a href="#certifications" data-nav><i>06</i>Certifications</a></li>
+          <li><a href="#contact"        data-nav><i>07</i>Contact</a></li>
+        </ul>
+
+        <div class="sidebar-foot">
+          <ul class="social">
+            <li><a href="https://github.com/samarthhgowdaa" target="_blank" rel="me noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="me noopener">LinkedIn</a></li>
+            <li><a href="mailto:samarthac4work@gmail.com">Email</a></li>
+            <li><a href="https://samarthhgowdaa.github.io/feed.xml" target="_blank" rel="noopener">RSS</a></li>
+          </ul>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle visual theme">
+            <span class="theme-dot" aria-hidden="true"></span>
+            <span id="theme-label">Dark</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ───────────────────────── MAIN CONTENT STREAM ───────────────────────── -->
+    <main class="main">
+
+      <!-- ───────────────────────── 01 ABOUT ───────────────────────── -->
+      <section id="about" class="section hero">
+        <p class="eyebrow">
+          <!-- <span class="location">Bengaluru, India</span> · -->
+          <span class="pulse" aria-hidden="true"></span>
+          <span>Open to collaborate &amp; talk</span>
+        </p>
+
+        <!-- ============================================================
+             BOLD STATEMENT CHOICES (Switch easily by uncommenting below)
+             ============================================================ -->
+        <h1>Exploring machines from raw silicon up to software.</h1>
+        <!-- Alternate Choices:
+        <h1>To truly love a machine, one must open it, understand its <em>heart</em>, its design &amp; its soul.</h1>
+        <h1>Bridging digital circuits, <em>low-level firmware</em>, and creative software.</h1>
+        <h1>Turning logic gates, <em>microcontrollers</em>, and code into tangible reality.</h1>
+        -->
+
+        <div class="about-copy">
+<p>Hey there! I'm <b>Samarth</b>, an Electrical & Electronics Engineer who loves understanding how things work from the bare metal up.</p>
+<div class="quote-box"><p><em>"To truly love a machine, one must open it, understand its heart, its design & its soul."</em></p></div>
+<p>I design and build whatever I can imagine and dream—bridging the gap between raw silicon, microcontroller firmware, and software. Whether it's writing drivers for an ESP32, exploring digital logic in Verilog, writing C from scratch, or configuring custom Linux workflows on Fedora KDE, I believe the best way to understand technology is to build it ourselves.</p>
+        </div>
+
+        <ul class="facts">
+        <li><b>Embedded &amp; Hardware</b><span>ESP32, STM32, Arduino, Raspberry Pi</span></li>
+        <li><b>Systems &amp; Low-Level</b><span>C, C++, Verilog, VHDL, Python</span></li>
+        <li><b>OS &amp; Environment</b><span>Fedora KDE, Pop!_OS, Ubuntu, Linux CLI</span></li>
+        <li><b>Design &amp; Craft</b><span>Digital Electronics, Tooling, Video Editing</span></li>
+        </ul>
+
+        <p class="cta">
+          <a class="btn btn-primary" href="#projects">Explore Projects</a>
+          <a class="btn" href="mailto:samarthac4work@gmail.com">Get in Touch</a>
+        </p>
+      </section>
+
+      <!-- ───────────────────────── 02 FOCUS ───────────────────────── -->
+      <section id="focus" class="section">
+        <h2 class="section-title"><i>02</i>Focus &amp; Toolkit</h2>
+        <p class="section-lede">Domains and technologies I enjoy diving into, from raw circuits and silicon up to operating systems and creative software.</p>
+
+        <div class="domains-grid">
+      <div class="domain-card">
+        <h3><span class="icon">◈</span> Embedded &amp; Microcontrollers</h3>
+        <p>Designing circuits, flashing microcontrollers, sensor interfacing, and writing firmware.</p>
+        <ul class="pill-list"><li>ESP32</li><li>STM32</li><li>Arduino</li><li>Raspberry Pi</li><li>UART / I2C / SPI</li><li>Sensors &amp; Actuators</li></ul>
+      </div>
+      <div class="domain-card">
+        <h3><span class="icon">◈</span> Digital Electronics &amp; HDL</h3>
+        <p>Modeling digital circuits, logic synthesis, and hardware description languages.</p>
+        <ul class="pill-list"><li>Verilog</li><li>VHDL</li><li>Digital Logic Design</li><li>FPGA Fundamentals</li><li>Combinational &amp; Sequential Circuits</li></ul>
+      </div>
+      <div class="domain-card">
+        <h3><span class="icon">◈</span> Systems &amp; Programming</h3>
+        <p>Writing performant, clean low-level software and algorithmic foundations from scratch.</p>
+        <ul class="pill-list"><li>C</li><li>C++</li><li>Python</li><li>Shell Scripting</li><li>Data Structures &amp; Algorithms</li></ul>
+      </div>
+      <div class="domain-card">
+        <h3><span class="icon">◈</span> OS, Environment &amp; Creative</h3>
+        <p>Workstations, Linux distributions, build tools, and digital media production.</p>
+        <ul class="pill-list"><li>Fedora KDE</li><li>Pop!_OS &amp; Ubuntu</li><li>Git / GitHub</li><li>GCC / Make / CMake</li><li>Video Editing</li></ul>
+      </div>
+        </div>
+
+        <div style="margin-top: 1.8rem; color: var(--fg-dim); font-size: .95rem;">
+<p>I like the sweet spot where theory meets real hardware—where code directly manipulates physical registers, voltages, and timing diagrams. Whether debugging UART logs, simulating state machines, or compiling C programs, I appreciate tools that provide transparency and precision.</p>
+        </div>
+      </section>
+
+    <!-- ============================================================
+         EXPERIENCE SECTION (Currently Commented Out)
+         To enable: set `enabled: true` in content/experience.md & run build.py
+         ============================================================
+    <section id="experience" class="section">
+      <h2 class="section-title"><i>02b</i>Experience</h2>
+      <p class="section-lede">Engineering roles, internships, and research projects.</p>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-when">2026 — Present</div>
+          <div class="tl-what">
+            <h3>Embedded Systems Engineer <span class="at">Company Name</span></h3>
+            <p class="tl-where">Bengaluru, India</p>
+            <p>Developing firmware and peripheral drivers for ARM microcontrollers and embedded Linux gateways.</p>
+            <ul class="bullets"><li>Wrote bare-metal device drivers for SPI, I2C, and UART communications.</li><li>Optimized interrupt handlers and low-power sleep modes for battery-operated sensors.</li><li>Integrated hardware-in-the-loop (HIL) automated test benches.</li></ul>
+            <ul class="tags"><li>C</li><li>C++</li><li>STM32</li><li>ESP32</li><li>FreeRTOS</li><li>Git</li></ul>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-when">2025 — 2026</div>
+          <div class="tl-what">
+            <h3>Hardware &amp; Firmware Intern <span class="at">Robotics / Tech Lab</span></h3>
+            <p class="tl-where">Bengaluru, India</p>
+            <p>Assisted in circuit schematic review, PCB prototyping, and microcontroller bring-up.</p>
+            <ul class="bullets"><li>Designed schematic layouts and validated power rail stability using oscilloscopes.</li><li>Implemented motor control PWM algorithms on Arduino and ESP32 platforms.</li></ul>
+            <ul class="tags"><li>Embedded C</li><li>Arduino</li><li>Digital Logic</li><li>Oscilloscope</li></ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+    ============================================================ -->
+
+      <!-- ───────────────────────── 03 PROJECTS ───────────────────────── -->
+      <section id="projects" class="section">
+        <h2 class="section-title"><i>03</i>Projects</h2>
+        <p class="section-lede">Things I built to understand how they work inside. Spanning low-level C, microcontroller firmware, digital circuits, and software tools.</p>
+
+        <!-- Category Filters -->
+        <div class="filters" role="group" aria-label="Filter projects by category">
+        <button class="chip is-active" data-filter="all">All Projects</button>
+        <button class="chip" data-filter="systems">Systems &amp; C/C++</button>
+        <button class="chip" data-filter="embedded">Hardware &amp; Embedded</button>
+        <button class="chip" data-filter="digital">Digital Logic &amp; HDL</button>
+        <button class="chip" data-filter="web">Web &amp; Tools</button>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="grid" id="project-grid">
+        <div class="card" data-category="systems">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/bibliothek" target="_blank" rel="noopener">bibliothek</a></h3>
+          <p>A library management system written in modern C++, emphasizing clean class architecture, robust data structures, and deterministic resource management.</p>
+          <ul class="tags"><li>C++</li><li>Data Structures</li><li>OOP</li><li>GPLv3</li></ul>
+        </div>
+        <div class="card" data-category="systems">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/Humble-Beginnings---C" target="_blank" rel="noopener">Humble Beginnings — C</a></h3>
+          <p>Deep dive into low-level systems programming in C from scratch. Exploring manual memory management, pointer arithmetic, struct alignment, and custom data structures.</p>
+          <ul class="tags"><li>C</li><li>Memory Management</li><li>Pointers</li><li>Algorithms</li></ul>
+        </div>
+        <div class="card" data-category="embedded">
+          <span class="card-year">2025</span>
+          <h3><a href="https://github.com/samarthhgowdaa/arduino" target="_blank" rel="noopener">Arduino &amp; Microcontroller Labs</a></h3>
+          <p>Hands-on embedded experimentation with microcontrollers: hardware timers, interrupt service routines, sensor bus interfacing (I2C/SPI), and peripheral control.</p>
+          <ul class="tags"><li>Arduino</li><li>C++</li><li>Embedded</li><li>Sensors</li></ul>
+        </div>
+        <div class="card" data-category="digital">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/projects" target="_blank" rel="noopener">Digital Logic &amp; HDL Sandbox</a></h3>
+          <p>Combinational and sequential digital circuit designs modeled in Verilog HDL. Includes multiplexers, finite state machines (FSM), registers, and testbench verification.</p>
+          <ul class="tags"><li>Verilog</li><li>VHDL</li><li>Digital Electronics</li><li>Simulation</li></ul>
+        </div>
+        <div class="card" data-category="web">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/genre-picker-WebApp" target="_blank" rel="noopener">genre-picker-WebApp</a></h3>
+          <p>An intuitive web application for book genre recommendation and curation, focusing on accessible interface design and rapid user filtering.</p>
+          <ul class="tags"><li>JavaScript</li><li>Web</li><li>HTML5</li><li>CSS</li></ul>
+        </div>
+        <div class="card" data-category="web">
+          <span class="card-year">2026</span>
+          <h3><a href="https://github.com/samarthhgowdaa/scratchStore" target="_blank" rel="noopener">scratchStore</a></h3>
+          <p>A lightweight responsive storefront interface built from scratch to study CSS modern layout mechanics, media queries, and component architecture.</p>
+          <ul class="tags"><li>CSS3</li><li>Layout</li><li>Frontend</li></ul>
+        </div>
+        </div>
+        <p class="grid-empty" id="grid-empty" hidden>No projects found in this category.</p>
+      </section>
+
+      <!-- ───────────────────────── 04 WRITING ───────────────────────── -->
+      <section id="writing" class="section">
+        <h2 class="section-title"><i>04</i>Writing &amp; Articles</h2>
+        <p class="section-lede">Notes, deep dives, and articles on electronics, systems programming, and things I build. Written with Chirpy by Jekyll.</p>
+
+        <ul class="writing-list">
+        <li class="writing-item">
+          <div class="writing-date">Sep 2026</div>
+          <div class="writing-content">
+            <h3><a href="https://samarthhgowdaa.github.io" target="_blank" rel="noopener">Understanding Hardware Registers: From C to Silicon</a></h3>
+            <p>How bitwise operations in C translate directly to peripheral control registers in microcontrollers, and why memory-mapped I/O makes hardware feel like software.</p>
+            <ul class="tags"><li>Embedded C</li><li>Microcontrollers</li><li>Architecture</li></ul>
+          </div>
+        </li>
+        <li class="writing-item">
+          <div class="writing-date">Jun 2026</div>
+          <div class="writing-content">
+            <h3><a href="https://samarthhgowdaa.github.io" target="_blank" rel="noopener">Why I Love Writing C from Scratch</a></h3>
+            <p>Reflections on stripping away modern abstractions to understand raw pointers, stack vs heap allocation, and the beauty of deterministic execution.</p>
+            <ul class="tags"><li>C</li><li>Systems</li><li>Learning</li></ul>
+          </div>
+        </li>
+        <li class="writing-item">
+          <div class="writing-date">Mar 2026</div>
+          <div class="writing-content">
+            <h3><a href="https://samarthhgowdaa.github.io" target="_blank" rel="noopener">Demystifying Finite State Machines in Verilog</a></h3>
+            <p>A practical guide to implementing Moore and Mealy state machines with clean synthesis-friendly idioms and testbench simulation techniques.</p>
+            <ul class="tags"><li>Verilog</li><li>Digital Design</li><li>HDL</li></ul>
+          </div>
+        </li>
+        </ul>
+
+        <div class="writing-foot">
+          <a class="btn btn-primary" href="https://samarthhgowdaa.github.io" target="_blank" rel="noopener">
+            Read more on my blog &rarr;
+          </a>
+        </div>
+      </section>
+
+      <!-- ───────────────────────── 05 EDUCATION ───────────────────────── -->
+      <section id="education" class="section">
+        <h2 class="section-title"><i>05</i>Education</h2>
+        <p class="section-lede">Academic background and foundational engineering coursework.</p>
+
+        <ol class="edu-list">
+        <li class="edu-item">
+          <div class="edu-when">2023 — Present</div>
+          <div class="edu-what">
+            <h3>B.E. in Electrical &amp; Electronics Engineering</h3>
+            <div class="edu-institution">Engineering College / University &bull; Bengaluru, India</div>
+            <p>In-depth study of electrical circuits, semiconductor devices, digital electronics, microprocessors, and control systems.</p>
+            <ul class="bullets"><li>Hands-on laboratory coursework in Digital Electronics, Microcontrollers, and Hardware Simulation.</li><li>Project work involving sensor networks, microcontroller interfacing, and HDL logic modeling.</li></ul>
+            <p style="margin-top: .6rem; margin-bottom: .3rem; font-size: .84rem; font-weight: 600; color: var(--fg-dim);">Key Coursework:</p><ul class="tags"><li>Digital System Design</li><li>Microprocessors &amp; Microcontrollers</li><li>Signals &amp; Systems</li><li>Linear Integrated Circuits</li><li>Control Systems</li><li>Computer Architecture</li></ul>
+          </div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-when">2021 — 2023</div>
+          <div class="edu-what">
+            <h3>Pre-University / Senior Secondary Education (PCMB)</h3>
+            <div class="edu-institution">Pre-University College &bull; Karnataka, India</div>
+            <p>Focus on Physics, Chemistry, Mathematics, and foundational sciences.</p>
+            <ul class="bullets"><li>Deepened interest in electronics, analytical mathematics, and mechanics.</li></ul>
+            
+          </div>
+        </li>
+        </ol>
+      </section>
+
+      <!-- ───────────────────────── 06 CERTIFICATIONS ───────────────────────── -->
+      <section id="certifications" class="section">
+        <h2 class="section-title"><i>06</i>Certifications</h2>
+        <p class="section-lede">Verified technical credentials, online specializations, and professional courses.</p>
+
+        <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-preview">
+            <img src="assets/certs/cert-embedded.svg" alt="Embedded Systems &amp; Microcontroller Architecture Preview" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <div class="cert-meta">
+              <span>Coursera / University Specialization</span>
+              <span>2026</span>
+            </div>
+            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Embedded Systems &amp; Microcontroller Architecture</a></h3>
+            <div class="cert-issuer">ID: <code>CERT-EMB-8492</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>ARM Cortex-M</li><li>Embedded C</li><li>RTOS Basics</li></ul>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-preview">
+            <img src="assets/certs/cert-verilog.svg" alt="Digital System Design with Verilog Preview" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <div class="cert-meta">
+              <span>NPTEL / IEEE Online Course</span>
+              <span>2025</span>
+            </div>
+            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">Digital System Design with Verilog</a></h3>
+            <div class="cert-issuer">ID: <code>CERT-VLOG-3109</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>Verilog HDL</li><li>FPGA Synthesis</li><li>Sequential Logic</li></ul>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-preview">
+            <img src="assets/certs/cert-c.svg" alt="C Programming &amp; Memory Architecture Preview" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <div class="cert-meta">
+              <span>Technical Academy / Platform</span>
+              <span>2025</span>
+            </div>
+            <h3><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">C Programming &amp; Memory Architecture</a></h3>
+            <div class="cert-issuer">ID: <code>CERT-CPRG-5812</code></div>
+            <ul class="tags" style="margin-top: auto;"><li>C</li><li>Pointers &amp; Memory</li><li>Data Structures</li></ul>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- ───────────────────────── 07 CONTACT ───────────────────────── -->
+      <section id="contact" class="section">
+        <h2 class="section-title"><i>07</i>Contact</h2>
+        <p class="section-lede">Whether you want to discuss embedded systems, hardware projects, C/C++, or just say hi—my inbox is always open.</p>
+
+        <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-label">Email</span>
+          <div class="contact-val"><a href="mailto:samarthac4work@gmail.com" target="_blank" rel="noopener">samarthac4work@gmail.com</a></div>
+        </li>
+        <li class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <div class="contact-val"><a href="https://github.com/samarthhgowdaa" target="_blank" rel="noopener">github.com/samarthhgowdaa</a></div>
+        </li>
+        <li class="contact-item">
+          <span class="contact-label">LinkedIn</span>
+          <div class="contact-val"><a href="https://www.linkedin.com/in/samarthhgowdaa/" target="_blank" rel="noopener">in/samarthhgowdaa</a></div>
+        </li>
+        <li class="contact-item">
+          <span class="contact-label">Blog &amp; RSS</span>
+          <div class="contact-val"><a href="https://samarthhgowdaa.github.io/feed.xml" target="_blank" rel="noopener">samarthhgowdaa.github.io/feed.xml</a></div>
+        </li>
+        </ul>
+
+        <p style="color: var(--fg-dim); font-size: .94rem;">
+          Always keen to talk about hardware architectures, microcontrollers, low-level software, or exciting collaborative ideas.
+        </p>
+      </section>
+
+      <!-- ───────────────────────── BOTTOM VISITOR DOCK & 3D GLOBE ───────────────────────── -->
+      <aside class="bottom-dock" aria-label="Visitor telemetry and profile statistics">
+        <div class="dock-left">
+          <div class="dock-status">
+            <span class="pulse" style="width: 7px; height: 7px;"></span>
+            <span>Live Telemetry &bull; <span id="ist-time">UTC+5:30</span></span>
+          </div>
+          <div class="dock-count">
+            <span id="visitor-count">1,042</span>
+            <small>profile visits tracked</small>
+          </div>
+          <p class="dock-sub">Hand-crafted semantic HTML5 &amp; modern CSS &bull; Hosted on GitHub Pages &bull; Zero external frameworks</p>
+        </div>
+
+        <div class="dock-right" title="Interactive 3D Dotted Globe — Drag to spin">
+          <canvas id="globe-canvas" width="110" height="110"></canvas>
+        </div>
+      </aside>
+
+      <!-- ───────────────────────── COLOPHON / FOOTER ───────────────────────── -->
+      <footer class="foot">
+        <p>&copy; 2026 Samarth Gowda. Built by hand &mdash; no framework, no npm, pure web.</p>
+        <p><a href="https://github.com/samarthhgowdaa" target="_blank" rel="noopener">Source on GitHub</a></p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/globe.js"></script>
+</body>
+</html>

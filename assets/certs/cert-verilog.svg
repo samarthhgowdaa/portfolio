@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180" fill="none">
+  <defs>
+    <linearGradient id="vlogGrad" x1="0" y1="0" x2="320" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16191f"/>
+      <stop offset="1" stop-color="#20242e"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="8" fill="url(#vlogGrad)" stroke="#303544" stroke-width="1.5"/>
+  <!-- Logic Gate Symbol (AND gate) -->
+  <path d="M140 45 H155 C170 45 180 55 180 70 C180 85 170 95 155 95 H140 Z" fill="#1b1e26" stroke="#e58a4e" stroke-width="1.8"/>
+  <line x1="125" y1="58" x2="140" y2="58" stroke="#e58a4e" stroke-width="1.6"/>
+  <line x1="125" y1="82" x2="140" y2="82" stroke="#e58a4e" stroke-width="1.6"/>
+  <line x1="180" y1="70" x2="195" y2="70" stroke="#e58a4e" stroke-width="1.6"/>
+  <circle cx="195" cy="70" r="2.5" fill="#e58a4e"/>
+  <!-- Timing Wave -->
+  <path d="M40 120 H80 V105 H120 V120 H160 V105 H200 V120 H240 V105 H280" stroke="#e58a4e" stroke-opacity="0.25" stroke-width="1.4"/>
+  <!-- Label -->
+  <text x="160" y="138" fill="#f0f2f5" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Digital System Design</text>
+  <text x="160" y="156" fill="#a6adb9" font-family="ui-monospace, monospace" font-size="10" text-anchor="middle">Verilog HDL • Synthesis • FSM</text>
+</svg>
